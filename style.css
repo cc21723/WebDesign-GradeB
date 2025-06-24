@@ -1,0 +1,56 @@
+/* 全局樣式 */
+body {
+  font-family: "Microsoft JhengHei", sans-serif;
+  background: #F7F5FF; /* 柔和紫色背景 */
+  color: #444;
+  margin: 0;
+  padding: 0;
+}
+
+/* 標題 */
+h1 {
+  text-align: center;
+  padding: 40px 0 20px;
+  font-size: 2em;
+  color: #5D4C86; /* 深紫色 */
+}
+
+/* 主容器 */
+.main-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  padding: 20px;
+}
+
+/* 題組卡片 */
+.category-card {
+  background-color: #FFF8FB; /* 奶油白略帶粉 */
+  width: 200px;
+  height: 100px;
+  border-radius: 16px;
+  box-shadow: 0 4px 10px rgba(93, 76, 134, 0.1); /* 紫色陰影 */
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.category-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(93, 76, 134, 0.2);
+}
+
+/* 連結樣式 */
+.card-title a {
+  font-size: 1.2em;
+  text-decoration: none;
+  color: #A06AB4; /* 柔紫色文字 */
+  font-weight: bold;
+  transition: color 0.2s ease;
+}
+
+.card-title a:hover {
+  color: #C88FD7; /* 滑鼠移上淡粉紫 */
+}
