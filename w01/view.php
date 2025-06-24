@@ -1,11 +1,30 @@
-<?php 
 
-switch($_GET['do'] ?? 'title') {
+<?php
+
+switch ($_GET['do'] ?? 'title') {
     case 'title':
-        echo "title";
+?>
+        
+
+    <?php
+
         break;
     case 'ad':
-        echo "ad";
+    ?>
+        <h3 style="text-align: center;">新增動態文字廣告</h3>
+        <hr>
+        <form action="">
+            <div class="tac">
+                <lable>動態文字廣告：</lable>
+                <input type="text" name="text" id="">
+            </div>
+            <div class="tac">
+                <input type="submit" value="新增">
+                <input type="reset" value="重置">
+            </div>
+        </form>
+
+<?php
         break;
     case 'mvim':
         $file = './backend/mvim.php';
