@@ -9,14 +9,15 @@ foreach($_POST['id'] as $key => $id){
         $Title->del($id);
     }else{
         $row = $Title->find($id);
+        // dd($row);
         $row['text'] = $_POST['text'][$key]; //[$key] 對應的索引值
         $row['sh'] = ($_POST['sh']==$id)?1:0;
         $Title->save($row);
+        dd($row);
     }
-    dd($row);
 }
 
-// to("../backend.php?do=title");
+to("../backend.php?do=title");
 
 
 ?>
