@@ -83,7 +83,7 @@ class DB{
     }
 
     function del($id){
-         $sql = "delete * from $this->table";
+         $sql = "delete from $this->table";
         
             if(is_array($id)){
                 $tmp = $this->arraytosql($id);
