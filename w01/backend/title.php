@@ -11,27 +11,27 @@
 					<td></td>
 				</tr>
 				<?php
-				$rows=$Title->all();
-				foreach($rows as $row):
+				$rows = $Title->all();
+				foreach ($rows as $row):
 				?>
-				<tr>
-					<td width="45%">
-					<img src="./images/<?=$row['img'];?>" style="width:300px; height:30px;padding-left: 20px;">
-					</td>
-					<td width="23%">
-						<input type="text" name="text[]" value="<?=$row['text'];?>">
-					</td>
-					<td width="7%" style="padding-left: 15px;">
-					<input type="radio" name="sh" value="<?=$row['id'];?>" <?=($row['sh']==1)?"checked":"";?>>
-					</td>
-					<td width="7%" style="padding-left: 15px;">
-					<input type="checkbox" name="del[]" value="<?=$row['id'];?>">
-					</td>
-					<td>
-						<input type="button" value="更新圖片">
-					</td>
-				</tr>
-				<input type="hidden" name="id[]" value="<?=$row['id'];?>">
+					<tr>
+						<td width="45%">
+							<img src="./images/<?= $row['img']; ?>" style="width:300px; height:30px;padding-left: 20px;">
+						</td>
+						<td width="23%">
+							<input type="text" name="text[]" value="<?= $row['text']; ?>">
+						</td>
+						<td width="7%" style="padding-left: 15px;">
+							<input type="radio" name="sh" value="<?= $row['id']; ?>" <?= ($row['sh'] == 1) ? "checked" : ""; ?>>
+						</td>
+						<td width="7%" style="padding-left: 15px;">
+							<input type="checkbox" name="del[]" value="<?= $row['id']; ?>">
+						</td>
+						<td>
+							<input type="button" value="更新圖片" onclick="op('#cover','#cvr','./modal/update_title.php?id=<?= $row['id']; ?>')">
+						</td>
+					</tr>
+					<input type="hidden" name="id[]" value="<?= $row['id']; ?>">
 				<?php endforeach; ?>
 			</tbody>
 		</table>
@@ -39,7 +39,7 @@
 			<tbody>
 				<tr>
 					<td width="200px">
-						<input type="button" onclick="op('#cover','#cvr','./modal/title.php')" value="新增網站標題圖片">
+						<input type="button" onclick="op('#cover', '#cvr', './modal/title.php')" value="新增網站標題圖片">
 					</td>
 					<td class="cent">
 						<input type="submit" value="修改確定">

@@ -53,10 +53,10 @@ class DB{
     }
 
     function find($id){
-        $sql = "select * from $this->table";
+        $sql = "select * from $this->table ";
         
             if(is_array($id)){
-                $tmp = $this->arraytosql($id);
+                $tmp=$this->arraytosql($id);
                 $sql=$sql." where ".join(" AND ", $tmp);
 
             }else{
@@ -78,7 +78,7 @@ class DB{
             $values = join("','",$array);
             $sql = "insert into $this->table(`$cols`) values('$values')";
         }
-        echo $sql;
+        // echo $sql;
         return $this->pdo->query($sql)->fetch(PDO::FETCH_ASSOC);
     }
 
