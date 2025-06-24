@@ -48,7 +48,7 @@ class DB{
         if(isset($arg[1])){
             $sql .= $arg[1];
         }
-
+        // echo $sql;
         return $this->pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
     }
 
@@ -78,6 +78,7 @@ class DB{
             $values = join("','",$array);
             $sql = "insert into $this->table(`$cols`) values('$values')";
         }
+        echo $sql;
         return $this->pdo->query($sql)->fetch(PDO::FETCH_ASSOC);
     }
 
