@@ -19,18 +19,19 @@
 					<img src="./images/<?=$row['img'];?>" style="width:300px; height:30px;padding-left: 20px;">
 					</td>
 					<td width="23%">
-						<input type="text" name="text" value="<?=$row['text'];?>">
+						<input type="text" name="text[]" value="<?=$row['text'];?>">
 					</td>
 					<td width="7%" style="padding-left: 15px;">
 					<input type="radio" name="sh" value="<?=$row['id'];?>" <?=($row['sh']==1)?"checked":"";?>>
 					</td>
 					<td width="7%" style="padding-left: 15px;">
-					<input type="checkbox" name="del" value="<?=$row['id'];?>">
+					<input type="checkbox" name="del[]" value="<?=$row['id'];?>">
 					</td>
 					<td>
 						<input type="button" value="更新圖片">
 					</td>
 				</tr>
+				<input type="hidden" name="id[]" value="<?=$row['id'];?>">
 				<?php endforeach; ?>
 			</tbody>
 		</table>
