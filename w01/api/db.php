@@ -57,7 +57,7 @@ class DB{
         
             if(is_array($id)){
                 $tmp=$this->arraytosql($id);
-                $sql=$sql." where ".join(" AND ", $tmp);
+                $sql=$sql." WHERE ".join(" AND ", $tmp);
 
             }else{
                 $sql .= " WHERE `id`='$id'";
@@ -106,6 +106,7 @@ class DB{
 }
 
 $Title = new DB('title');
+$Ad = new DB('ad');
 
 
 
