@@ -22,7 +22,7 @@
         <input type="text" name="text" id="" value="卓越科技大學校園資訊系統">
     </div>
     <div class="tac">
-        <input type="hidden" name="table" value="title">
+        <input type="hidden" name="table" value="<?=$_GET['table'];?>">
         <input type="submit" value="新增">
         <input type="reset" value="重置">
     </div>

@@ -8,7 +8,7 @@ if(!empty($_FILES['img']['tmp_name'])){
 }
 
 $table= $_POST['table'];
-$db = ${ucfirst($table)};
+$db=${ucfirst($table)};
 
 
 if($table=='title'){

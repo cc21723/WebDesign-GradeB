@@ -1,6 +1,6 @@
 <div style="width:99%; height:87%; margin:auto; overflow:auto; border:#666 1px solid;">
 	<p class="t cent botli">動態文字廣告管理</p>
-	<form method="post" action="./api/edit_ad.php">
+	<form method="post" action="./api/edit.php">
 		<table width="100%">
 			<tbody>
 				<tr class="yel">
@@ -9,7 +9,7 @@
 					<td width="10%">刪除</td>
 				</tr>
 				<?php
-				$rows = $Ad->all();
+				$rows = ${ucfirst($do)}->all();
 				foreach ($rows as $row):
 				?>
 					<tr>
@@ -31,7 +31,8 @@
 			<tbody>
 				<tr>
 					<td width="200px">
-						<input type="button" onclick="op('#cover', '#cvr', './modal/ad.php')" value="新增動態文字廣告">
+						<input type="hidden" name="table" value="<?=$do;?>">
+						<input type="button" onclick="op('#cover', '#cvr', './modal/<?=$do;?>.php?table=<?=$do;?>')" value="新增動態文字廣告">
 					</td>
 					<td class="cent">
 						<input type="submit" value="修改確定">
