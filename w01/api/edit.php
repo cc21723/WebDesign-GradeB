@@ -21,8 +21,8 @@ foreach ($_POST['id'] as $key => $id) {
                 $row['text'] = $_POST['text'][$key]; //[$key] 對應的索引值
                 $row['sh'] = (isset($_POST['sh']) && in_array($id, $_POST['sh'])) ? 1 : 0;
                 break;
-            case 'login':
-
+            case 'mvim':
+                $row['sh'] = (isset($_POST['sh']) && in_array($id, $_POST['sh'])) ? 1 : 0;
                 break;
             case 'view':
 
