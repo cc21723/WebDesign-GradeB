@@ -17,24 +17,22 @@ foreach ($_POST['id'] as $key => $id) {
                 $row['text'] = $_POST['text'][$key]; //[$key] 對應的索引值
                 $row['sh'] = ($_POST['sh'] == $id) ? 1 : 0;
                 break;
-            case 'ad':
-                $row['text'] = $_POST['text'][$key]; //[$key] 對應的索引值
+            case 'admin':
+
+                break;
+            case 'menu':
+
+                break;
+            // case 'ad':
+            // case 'news':
+            // case 'mvim':
+            // case 'image':
+
+            default:
+                if (isset($row['text'])) {
+                    $row['text'] = $_POST['text'][$key]; //[$key] 對應的索引值
+                }
                 $row['sh'] = (isset($_POST['sh']) && in_array($id, $_POST['sh'])) ? 1 : 0;
-                break;
-            case 'mvim':
-                $row['sh'] = (isset($_POST['sh']) && in_array($id, $_POST['sh'])) ? 1 : 0;
-                break;
-            case 'view':
-
-                break;
-            case 'news':
-
-                break;
-            case 'ad':
-
-                break;
-            case 'ad':
-
                 break;
         }
 
