@@ -109,12 +109,12 @@ $Title = new DB('title');  //網站標題管理
 $Ad = new DB('ad');        //動態文字廣告管理
 $Mvim = new DB('mvim');    //動畫圖片管理
 
-$Images = new DB('images'); //校園映像資料管理
+$Image = new DB('image'); //校園映像資料管理
 $Total = new DB('total');   //進站總人數管理
-$Footer = new DB('footer'); //頁尾版權資料管理
+$Bottom = new DB('bottom'); //頁尾版權資料管理
 $News = new DB('news');     //最新消息資料管理
-$Acc = new DB('acc');       //管理者帳號管理
-$Navs = new DB('navs');     //選單管理
+$Admin = new DB('admin');       //管理者帳號管理
+$Menu = new DB('menu');     //選單管理
 
 
 

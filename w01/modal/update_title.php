@@ -9,7 +9,6 @@
         margin: 10px auto;
     }
 </style>
-
 <h3 style="text-align: center;">更新標題區圖片</h3>
 <hr>
 <form action="./api/update.php" method='post' enctype="multipart/form-data">
