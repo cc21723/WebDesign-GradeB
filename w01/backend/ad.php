@@ -1,6 +1,6 @@
 <div style="width:99%; height:87%; margin:auto; overflow:auto; border:#666 1px solid;">
 	<p class="t cent botli">動態文字廣告管理</p>
-	<form method="post" action="./api/edit_title.php">
+	<form method="post" action="./api/edit_ad.php">
 		<table width="100%">
 			<tbody>
 				<tr class="yel">
@@ -14,7 +14,7 @@
 				?>
 					<tr>
 						<td>
-							<input type="text" name="text[]" value="<?= $row['text']; ?>'" style="width:90%;">
+							<input type="text" name="text[]" value="<?= $row['text']; ?>" style="width:90%;">
 						</td>
 						<td style="padding-left: 15px;">
 							<input type="checkbox" name="sh[]" value="<?= $row['id']; ?>" <?= ($row['sh'] == 1) ? "checked" : ""; ?>>
