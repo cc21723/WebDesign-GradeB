@@ -10,12 +10,16 @@
     }
 </style>
 
-<h3 style="text-align: center;">新增最新消息資料</h3>
+<h3 style="text-align: center;">新增主選單</h3>
 <hr>
 <form action="./api/insert.php" method='post' enctype="multipart/form-data">
     <div class="tac">
-        <lable>最新消息資料：</lable>
-        <textarea name="text"></textarea>
+        <lable>主選單名稱：</lable>
+        <input type="text" name="text">
+    </div>
+    <div class="tac">
+        <lable>選單連結網址：</lable>
+        <input type="text" name="href">
     </div>
     <div class="tac">
         <input type="hidden" name="table" value="<?=$_GET['table'];?>">
