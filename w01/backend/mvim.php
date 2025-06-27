@@ -24,7 +24,7 @@
 							<input type="checkbox" name="del[]" value="<?= $row['id']; ?>">
 						</td>
 						<td style="padding-left: 5%;">
-							<input type="button" value="更換動畫" onclick="op('#cover','#cvr','./modal/update_mvim.php?id=<?= $row['id']; ?>')">
+							<input type="button" value="更換動畫" onclick="op('#cover','#cvr','./modal/update_mvim.php?id=<?= $row['id'] ?>&table=<?= $do; ?>')">
 						</td>
 					</tr>
 					<input type="hidden" name="id[]" value="<?= $row['id']; ?>">
@@ -35,8 +35,8 @@
 			<tbody>
 				<tr>
 					<td width="200px">
-						<input type="hidden" name="table" value="<?=$do;?>">
-						<input type="button" onclick="op('#cover', '#cvr', './modal/<?=$do;?>.php?table=<?=$do;?>')" value="新增動畫圖片">
+						<input type="hidden" name="table" value="<?= $do; ?>">
+						<input type="button" onclick="op('#cover', '#cvr', './modal/<?= $do; ?>.php?table=<?= $do; ?>')" value="新增動畫圖片">
 					</td>
 					<td class="cent">
 						<input type="submit" value="修改確定">
