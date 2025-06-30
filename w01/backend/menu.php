@@ -12,7 +12,7 @@
                     <td width="5%"></td>
                 </tr>
                 <?php
-                $rows = ${ucfirst($do)}->all();
+                $rows = ${ucfirst($do)}->all(['main_id'=>0]);
                 foreach ($rows as $row):
                 ?>
                     <tr>
@@ -23,7 +23,7 @@
                             <input type="text" name="href[]" value="<?= $row['href']; ?>" style="width:90%">
                         </td>
                         <td>
-                            <input type="text" name="main_id" value="<?= $row['main_id']; ?>">
+                            <?=count($Menu->all(['main_id'=> $row['id']]));?>
                         </td>
                         <td style="padding-left: 15px;">
                             <input type="checkbox" name="sh[]" value="<?= $row['id']; ?>" <?= ($row['sh'] == 1) ? "checked" : ""; ?>>
