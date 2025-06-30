@@ -9,7 +9,7 @@
                     <td width="10%">次選單數</td>
                     <td width="5%">顯示</td>
                     <td width="5%">刪除</td>
-                    <td width="10%"></td>
+                    <td width="5%"></td>
                 </tr>
                 <?php
                 $rows = ${ucfirst($do)}->all();
@@ -31,7 +31,7 @@
                         <td style="padding-left: 15px;">
 							<input type="checkbox" name="del[]" value="<?= $row['id']; ?>">
 						</td>
-                        <td style="padding-left: 5%;">
+                        <td>
 							<input type="button" value="編輯次選單" onclick="op('#cover','#cvr','./modal/submenu.php')">
 						</td>
                     </tr>
