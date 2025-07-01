@@ -42,7 +42,7 @@
 				<div style="width:100%; padding:2px; height:290px;">
 					<div id="mwww" loop="true" style="width:100%; height:100%;">
 						<div style="width:99%; height:100%; position:relative;" class="cent">
-							<embed loop=true src='./images/01C02.gif' style='width:99%; height:100%;'></embed>
+							<!-- 動畫圖區 -->
 						</div>
 					</div>
 				</div>
@@ -69,6 +69,7 @@
 						if (now >= lin.length)
 							now = 0;
 					}
+					ww();
 				</script>
 				<div style="width:95%; padding:2px; height:190px; margin-top:10px; padding:5px 10px 5px 10px; border:#0C3 dashed 3px; position:relative;">
 					<span class="t botli">最新消息區
