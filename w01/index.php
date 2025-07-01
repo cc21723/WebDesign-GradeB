@@ -20,8 +20,8 @@
 		</div>
 	</div>
 	<div id="main">
-		<a title="" href="./index.php">
-			<div class="ti" style="background:url('use/'); background-size:cover;"></div><!--標題-->
+		<a title="<?= $Title->find(['sh'=>1])['text']; ?>" href="./index.php">
+			<div class="ti" style="background:url(&#39;images/<?= $Title->find(['sh'=>1])['img']; ?>&#39;); background-size:cover;"></div><!--標題-->
 		</a>
 		<div id="ms">
 			<div id="lf" style="float:left;">
