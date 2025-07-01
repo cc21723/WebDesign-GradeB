@@ -9,7 +9,7 @@
 
     <title>卓越科技大學校園資訊系統</title>
     <link href="./css/css.css" rel="stylesheet" type="text/css">
-    <script src="./js/jquery-3.4.1.min.js"></script>
+    <script src="./js/jquery-3.4.1.js"></script>
     <script src="./js/js.js"></script>
 </head>
 
@@ -34,6 +34,29 @@
                 <div id="menuput" class="dbor">
                     <!--主選單放此-->
                     <span class="t botli">主選單區</span>
+                    <?php
+                    $mains = $Menu->all(['main_id' => 0]);
+                    foreach ($mains as $main) {
+                        echo "<div class='mainmu'>";
+                        echo "<a href='{$main['href']}'>";
+                        echo $main['text'];
+                        echo "	</a>";
+
+                        if ($Menu->count(['main_id' => $main['id']]) > 0) {
+                            $subs = $Menu->all(['main_id' => $main['id']]);
+                            echo "<div  class='mw'>";
+                            foreach ($subs as $sub) {
+                                echo "<div class='mainmu2'>";
+                                echo "<a href='{$sub['href']}'>";
+                                echo $sub['text'];
+                                echo "	</a>";
+                                echo "	</div>";
+                            }
+                            echo "	</div>";
+                        }
+                        echo "	</div>";
+                    }
+                    ?>
                 </div>
                 <div class="dbor" style="margin:3px; width:95%; height:20%; line-height:100px;">
                     <span class="t">進站總人數 :<?= $Total->find(1)['total']; ?></span>
@@ -62,19 +85,19 @@
                         <img src="./icon/up.jpg" alt="">
                     </div>
                     <?php
-                    $images = $Image->all(['sh'=>1]);
-                    foreach($images as $key => $image):
+                    $images = $Image->all(['sh' => 1]);
+                    foreach ($images as $key => $image):
                     ?>
-                    <div class='cent im' id="ssaa<?=$key;?>">
-                        <img src="./images/<?=$image['img'];?>" style="width:150px;height:103px;border:3px solid orange;margin:2px;">
-                    </div>
-                    <?php endforeach;?>
+                        <div class='cent im' id="ssaa<?= $key; ?>">
+                            <img src="./images/<?= $image['img']; ?>" style="width:150px;height:103px;border:3px solid orange;margin:2px;">
+                        </div>
+                    <?php endforeach; ?>
                     <div class="cent" onclick="pp(2)">
                         <img src="./icon/dn.jpg" alt="">
                     </div>
                     <script>
                         var nowpage = 0,
-                            num = <?=$Image->count(['sh'=>1]);?>;
+                            num = <?= $Image->count(['sh' => 1]); ?>;
 
                         function pp(x) {
                             var s, t;
