@@ -1,4 +1,4 @@
-<?php include_once "./api/db.php"?>
+<?php include_once "./api/db.php" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <!-- saved from url=(0040)http://127.0.0.1/test/exercise/collage/? -->
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -20,8 +20,8 @@
 		</div>
 	</div>
 	<div id="main">
-		<a title="<?= $Title->find(['sh'=>1])['text']; ?>" href="./index.php">
-			<div class="ti" style="background:url(&#39;images/<?= $Title->find(['sh'=>1])['img']; ?>&#39;); background-size:cover;"></div><!--標題-->
+		<a title="<?= $Title->find(['sh' => 1])['text']; ?>" href="./index.php">
+			<div class="ti" style="background:url(&#39;images/<?= $Title->find(['sh' => 1])['img']; ?>&#39;); background-size:cover;"></div><!--標題-->
 		</a>
 		<div id="ms">
 			<div id="lf" style="float:left;">
@@ -38,8 +38,24 @@
 				</marquee>
 				<div style="height:32px; display:block;"></div>
 				<!--正中央-->
+
+				<div style="width:100%; padding:2px; height:290px;">
+					<div id="mwww" loop="true" style="width:100%; height:100%;">
+						<div style="width:99%; height:100%; position:relative;" class="cent">
+							<embed loop=true src='./images/01C02.gif' style='width:99%; height:100%;'></embed>
+						</div>
+					</div>
+				</div>
 				<script>
 					var lin = new Array();
+					<?php
+					$mvims = $Mvim->all(['sh' => 1]);
+					foreach ($mvims as $mvim):
+					?>
+						lin.push('./images/<?= $mvim['img']; ?>');
+					<?php
+					endforeach;
+					?>
 					var now = 0;
 					if (lin.length > 1) {
 						setInterval("ww()", 3000);
@@ -54,11 +70,6 @@
 							now = 0;
 					}
 				</script>
-				<div style="width:100%; padding:2px; height:290px;">
-					<div id="mwww" loop="true" style="width:100%; height:100%;">
-						<div style="width:99%; height:100%; position:relative;" class="cent">沒有資料</div>
-					</div>
-				</div>
 				<div style="width:95%; padding:2px; height:190px; margin-top:10px; padding:5px 10px 5px 10px; border:#0C3 dashed 3px; position:relative;">
 					<span class="t botli">最新消息區
 					</span>
