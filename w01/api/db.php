@@ -141,3 +141,12 @@ $Bottom = new DB('bottom'); //頁尾版權資料管理
 $News = new DB('news');     //最新消息資料管理
 $Admin = new DB('admin');       //管理者帳號管理
 $Menu = new DB('menu');     //選單管理
+
+
+//考試可以不用寫
+if(!isset($_SESSION['visit'])){
+    $t=$Total->find(1);
+    $t['total']++;
+    $Total->save($t);
+    $_SESSION['visit']=1;
+}

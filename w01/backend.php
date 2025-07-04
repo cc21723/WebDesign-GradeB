@@ -20,8 +20,8 @@
 		</div>
 	</div>
 	<div id="main">
-		<a title="<?= $Title->find(['sh'=>1])['text']; ?>" href="index.php">
-			<div class="ti" style="background:url('images/<?= $Title->find(['sh'=>1])['img']; ?>'); background-size:cover;"></div><!--標題-->
+		<a title="<?= $Title->find(['sh' => 1])['text']; ?>" href="index.php">
+			<div class="ti" style="background:url('images/<?= $Title->find(['sh' => 1])['img']; ?>'); background-size:cover;"></div><!--標題-->
 		</a>
 		<div id="ms">
 			<div id="lf" style="float:left;">
@@ -80,7 +80,8 @@
 								<a href="?do=admin" style="color:#000; text-decoration:none;">後台管理區</a>
 							</td>
 							<td>
-								<button onclick="document.cookie='user=';location.replace('?')" style="width:99%; margin-right:2px; height:50px;">管理登出</button>
+								<button onclick="location.replace('index.php?do=login')" 
+								style="width:99%; margin-right:2px; height:50px;">管理登出</button>
 							</td>
 						</tr>
 					</tbody>

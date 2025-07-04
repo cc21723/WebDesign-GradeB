@@ -1,5 +1,19 @@
 <?php
+// 啟用 session
+session_start();
 
+//設定時區
+date_default_timezone_set("Asia/Taipei");
+
+//查詢
+
+
+// 輸出
+
+//頁面跳轉
+
+
+//連線
 // $host = 'sql109.infinityfree.com';
 // $db   = 'if0_39375073_hanami';
 // $user = 'if0_39375073';
