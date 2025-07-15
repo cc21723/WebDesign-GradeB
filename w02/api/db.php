@@ -9,7 +9,7 @@ function dd($array){
 }
 
 function q($sql){
-    $dsn='mysql:host=localhost;dbname=db18;charset=utf8';
+    $dsn='mysql:host=localhost;dbname=db15_2;charset=utf8';
     $pdo=new PDO($dsn,'root','');
     return $pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
 }
@@ -19,7 +19,7 @@ function to($url){
 }
 
 class DB{
-private $dsn="mysql:host=localhost;dbname=db18;charset=utf8";
+private $dsn="mysql:host=localhost;dbname=db15_2;charset=utf8";
 private $pdo;   
 private $table;
 
@@ -142,8 +142,9 @@ private function arraytosql($array){
 }
 
 
-$User=new DB('users');
-$Visit=new DB("visit");
+$User = new DB('users');
+$Visit = new DB("visit");
+$News = new DB("news");
 /* 測試資料庫連線及功能正常
 $User->save(['acc'=>'test','pw'=>'5678','email'=>'test@labor.gov.tw']);
 $User->save(['acc'=>'mem01','pw'=>'mem01','email'=>'mem01@labor.gov.tw']);
