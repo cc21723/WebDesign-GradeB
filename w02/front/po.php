@@ -50,11 +50,9 @@
         // });
     });
 
-
+    //type 資料表news 的 type欄位
     function getList(type) {
-        $.get("api/get_type_list.php", {
-            type
-        }, function(list) {
+        $.get("api/get_type_list.php", {type}, function(list) {
             $("#Post").html("");
             $("#TypeList").html(list);
 
