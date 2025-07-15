@@ -1,9 +1,9 @@
 <div class="nav" style="margin-bottom: 20px;">
 
-    目前位置：首頁 > 分類網誌 > <span id="NavType">慢性病防治</span>
+    目前位置：首頁 > 分類網誌 > <span id="NavType">健康新知</span>
 </div>
 
-<fieldset style="width: 120px;display:inline-block">
+<fieldset style="width:120px;display:inline-block;vertical-align:top">
     <legend>分類網誌</legend>
     <div><a class="type-link" data-type='1'>健康新知</a></div>
     <div><a class="type-link" data-type='2'>菸害防治</a></div>
@@ -11,7 +11,7 @@
     <div><a class="type-link" data-type='4'>慢性病防治</a></div>
 </fieldset>
 
-<fieldset style="width: 600px;display:inline-block">
+<fieldset style="width:590px;display:inline-block">
     <legend>文章列表</legend>
     <div id="TypeList"></div>
     <div id="Post"></div>
@@ -19,15 +19,50 @@
 </fieldset>
 
 <script>
-    $(".type-link").on("click", function () {
+    getList(1);
+
+    $(".type-link").on("click", function() {
         let type = $(this).text();
         $("#NavType").text(type);
 
         let typeId = $(this).data("type");
-        $.get("api/get_type_list.php",{type:typeId},function(list){
-            $("#Post").html("");
-            $("#TypeList").html(list);
-        })
+        getList(typeId);
+        // $.get("api/get_type_list.php",{type:typeId},function(list){
+        //     $("#Post").html("");
+        //     $("#TypeList").html(list);
+        // })
 
     });
+
+    function getPost(id){
+    $.get("./api/get_post.php",{id},function(post){
+            $("#TypeList").html("");
+            $("#Post").html(post)
+        })
+}
+
+
+    $(".post-item").on("click", function() {
+        let postId = $(this).data("post");
+        getPost(postId);
+        // $.get("api/get_post.php", {id}, function(post) {
+        //     $("#Post").html(post);
+        // });
+    });
+
+
+    function getList(type) {
+        $.get("api/get_type_list.php", {
+            type
+        }, function(list) {
+            $("#Post").html("");
+            $("#TypeList").html(list);
+
+            $(".post-item").on("click", function() {
+                //取得文章ID
+                let postId = $(this).data("post");
+                getPost(postId);
+            });
+        })
+    }
 </script>
