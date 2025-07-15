@@ -66,6 +66,7 @@ function count(...$arg){
     return $this->pdo->query($sql)->fetchColumn();
 }
 
+//瀏灠人次統計功能
 function sum($col,...$arg){
     $sql="select sum($col) from $this->table ";
     if(isset($arg[0])){
