@@ -50,7 +50,17 @@
                     </div>
                 </div>
             </td>
-            <td></td>
+            <td>
+                 <?php 
+                if(isset($_SESSION['login'])):
+                ?>
+                <span>3</span>個人說
+                <img src="./icon/02B03.jpg" alt="讚" style="width: 18px;">
+                <a href="">-讚</a>
+                <?php
+                endif;
+                ?>
+            </td>
         </tr>
     <?php
     endforeach;
