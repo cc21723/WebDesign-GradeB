@@ -38,8 +38,9 @@
             <td>
                 <?php 
                 if(isset($_SESSION['login'])):
+                    $chk=$Log->count(['news'=>$row['id'],'user'=>$_SESSION['login']])
                 ?>
-                <a href="">讚</a>
+                <a href="#" onclick="good(<?=$row['id'];?>)"><?=($chk)?"收回讚":"讚";?></a>
                 <?php
                 endif;
                 ?>
@@ -73,4 +74,12 @@
         $(this).next().find(".short,.all").toggle();
         //$(this).next().find(".all").toggle();
     })
+
+    //news = 文章的id
+    function good(news) { 
+        $.post("./api/good.php",{news},function() { 
+            location.reload();
+
+         })
+     }
 </script>
