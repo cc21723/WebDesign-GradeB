@@ -37,6 +37,7 @@
 					<marquee style='width:78%; display:inline-block'>請民眾踴躍投稿電子報，讓電子報成為大家相互交流、分享的園地！詳見最新文章</marquee>
                 	<span style="width:20%; display:inline-block;">
 
+					<!-- 建立前台面載入機制 -->
 					<?php 
 					if(isset($_SESSION['login'])){
 						if($_SESSION['login']=='admin'){
