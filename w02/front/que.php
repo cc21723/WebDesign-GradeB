@@ -12,7 +12,7 @@
         $rows = $Que->all(['subject_id'=>0]);
         foreach ($rows as $key => $row):
         ?>
-        <tr>
+        <tr class="ct">
             <td><?=$key+1;?></td>
             <td><?=$row['text'];?></td>
             <td><?=$row['vote'];?></td>
