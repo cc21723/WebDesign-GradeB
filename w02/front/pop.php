@@ -60,7 +60,7 @@
                 ?>
                     <span>3</span>個人說
                     <img src="./icon/02B03.jpg" alt="讚" style="width: 18px;">
-                    <a href="#" onclick="good(<?= $row['id']; ?>)"><?= ($chk) ? '-收回讚' : '-讚'; ?></a>
+                    <a href="#" onclick="good(<?=$row['id'];?>)"><?=($chk)?'-收回讚':'-讚';?></a>
                 <?php
                 endif;
                 ?>
@@ -98,4 +98,10 @@
         // out
         $(this).next().find(".pop").hide();
     });
+
+      function good(news){
+        $.post("./api/good.php",{news},function(){
+                location.reload();
+        })
+    }
 </script>
