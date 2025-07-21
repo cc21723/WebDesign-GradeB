@@ -16,7 +16,7 @@
             <td><?=$key+1;?></td>
             <td><?=$row['text'];?></td>
             <td><?=$row['vote'];?></td>
-            <td><a href="?do=result&id="<?=$row['id'];?>>結果</a></td>
+            <td><a href='?do=result&id=<?=$row['id'];?>'>結果</a></td>
             <td>
             <?php
             if(isset($_SESSION['login'])):                
