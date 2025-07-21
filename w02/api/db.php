@@ -18,7 +18,7 @@ function dd($array){
 function q($sql){
     $dsn='mysql:host=localhost;dbname=db15_2;charset=utf8';
     $pdo=new PDO($dsn,'root','');
-    return $pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
+    return $pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC); //一次性抓取全部查詢結果，並用關聯式陣列（column_name => value）格式來回傳資料。
 }
 
 function to($url){
@@ -35,6 +35,7 @@ function __construct($table){
     $this->pdo=new PDO($this->dsn,"root",'');
 }
 
+//查詢整個資料表
 function all(...$arg){
     $sql="select * from $this->table ";
     if(isset($arg[0])){
@@ -70,7 +71,7 @@ function count(...$arg){
         $sql .= $arg[1];
     }
 
-    return $this->pdo->query($sql)->fetchColumn();
+    return $this->pdo->query($sql)->fetchColumn(); //抓取結果筆數
 }
 
 //瀏灠人次統計功能
@@ -104,7 +105,7 @@ function find($id){
         $sql .= " WHERE `id`='$id'";
     }
     //echo $sql;
-    return $this->pdo->query($sql)->fetch(PDO::FETCH_ASSOC);
+    return $this->pdo->query($sql)->fetch(PDO::FETCH_ASSOC); //抓單筆資料回傳
 }
 
 function save($array){
