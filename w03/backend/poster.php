@@ -6,38 +6,44 @@
         <div style="width:24.5%; background: #ccc;">預告片排序</div>
         <div style="width:24.5%; background: #ccc;">操作</div>
     </div>
-    <div style="overflow: auto;height: 200px;">
-        <?php
-        $posters = $Poster->all(" order by `rank`");
-        foreach ($posters as $poster):
-        ?>
-
-            <div class="ct" style="display: flex;justify-content:space-between;margin:3px 0;">
-                <div style="width:24.5%;">
-                    <img src="./images/<?= $poster['img'] ?>" style="width: 60px;height: 80px;">
+    <form action="./api/edit_poster.php" method="post">
+        <div style="overflow: auto;height: 200px;">
+            <?php
+            $posters = $Poster->all(" order by `rank`");
+            foreach ($posters as $poster):
+            ?>
+    
+                <div class="ct" style="display: flex;justify-content:space-between;align-items:center;margin:5px 0;">
+                    <div style="width:24.5%;">
+                        <img src="./images/<?= $poster['img'] ?>" style="width: 60px;height: 80px;">
+                    </div>
+                    <div style="width:24.5%;">
+                        <input type="text" name="name[]" value="<?= $poster['name'] ?>" style="width: 90%;">
+                    </div>
+                    <div style="width:24.5%;">
+                        <input type="button" value="往上">
+                        <input type="button" value="往下">
+                    </div>
+                    <div style="width:24.5%;">
+                    <input type="checkbox" name="sh[]"  value="<?=$poster['id']?>" <?=($poster['sh']==1)?'checked':'';?>>顯示
+                    <input type="checkbox" name="del[]" value="<?=$poster['id']?>">刪除
+                    <select name="ani[]">
+                        <option value="1" <?=($poster['ani']==1)?'selected':'';?>>淡入淡出</option>
+                        <option value="2" <?=($poster['ani']==2)?'selected':'';?>>縮放</option>
+                        <option value="3" <?=($poster['ani']==3)?'selected':'';?>>滑入滑出</option>
+                    </select>
+                    </div>
                 </div>
-                <div style="width:24.5%;">
-                    <input type="text" name="name[]" value="<?= $poster['name'] ?>" style="width: 90%;">
-                </div>
-                <div style="width:24.5%;">
-                    <input type="button" value="往上">
-                    <input type="button" value="往下">
-                </div>
-                <div style="width:24.5%;">
-                <input type="checkbox" name="sh[]"  value="<?=$poster['id']?>" <?=($poster['sh']==1)?'checked':'';?>>顯示
-                <input type="checkbox" name="del[]" value="<?=$poster['id']?>">刪除
-
-                </div>
+    
+            <?php
+            endforeach;
+            ?>
+            <div class="ct">
+                <input type="submit" value="編輯確定">
+                <input type="reset" value="重置">
             </div>
-
-        <?php
-        endforeach;
-        ?>
-        <div class="ct">
-            <input type="submit" value="編輯確定">
-            <input type="reset" value="重置">
         </div>
-    </div>
+    </form>
 
 
 </div>
