@@ -10,7 +10,9 @@
         <div style="overflow: auto;height: 200px;">
             <?php
             $posters = $Poster->all(" order by `rank`");
-            foreach ($posters as $poster):
+            foreach ($posters as $idx => $poster):
+                $prev=($idx-1>=0)?$posters[$idx-1]['id']:$poster['id'];
+                $next=($idx+1<count($posters))?$posters[$idx+1]['id']:$poster['id'];
             ?>
     
                 <div class="ct" style="display: flex;justify-content:space-between;align-items:center;margin:5px 0;">
@@ -21,8 +23,8 @@
                         <input type="text" name="name[]" value="<?= $poster['name'] ?>" style="width: 90%;">
                     </div>
                     <div style="width:24.5%;">
-                        <input type="button" value="往上">
-                        <input type="button" value="往下">
+                        <button class="sw-btn" type="button" data-sw='<?=$prev;?>' data-id="<?=$poster['id'];?>">往上</button>
+                        <button class="sw-btn" type="button" data-sw='<?=$next;?>' data-id="<?=$poster['id'];?>">往下</button>
                     </div>
                     <div style="width:24.5%;">
                     <input type="checkbox" name="sh[]"  value="<?=$poster['id']?>" <?=($poster['sh']==1)?'checked':'';?>>顯示
@@ -34,7 +36,7 @@
                     </select>
                     </div>
                 </div>
-    
+                <input type="hidden" name="id[]" value="<?=$poster['id'];?>">
             <?php
             endforeach;
             ?>
@@ -47,6 +49,17 @@
 
 
 </div>
+
+<script>
+    $(".sw-btn").on("click",function(){
+        let id = $(this).data("id");
+        let sw = $(this).data("sw");
+        $.post("./api/sw.php",{table:'Poster',id,sw},(res)=>{
+            location.reload();
+        })
+    })
+</script>
+
 <hr>
 <div style="height: 140px;">
     <h3 class="ct" style="margin: 0;">新增預告片海報</h3>
