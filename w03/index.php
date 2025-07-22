@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+﻿<?php include_once "./api/db.php"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <!-- saved from url=(0047)? -->
 <html xmlns="http://www.w3.org/1999/xhtml">
 
@@ -15,8 +17,14 @@
     <div id="top" class="ct" style=" background:#999 center; background-size:cover; " title="替代文字">
       <h1>ABC影城</h1>
     </div>
-    <div id="top2"> <a href="index.php">首頁</a> <a href="03P02.htm">線上訂票</a> <a href="#">會員系統</a> <a href="back.php">管理系統</a> </div>
-    <div id="text"> <span class="ct">最新活動</span>
+    <div id="top2">
+      <a href="index.php">首頁</a>
+      <a href="order.htm">線上訂票</a>
+      <a href="#">會員系統</a>
+      <a href="back.php">管理系統</a>
+    </div>
+    <div id="text">
+      <span class="ct">最新活動</span>
       <marquee direction="right">
         ABC影城票價全面八折優惠1個月
       </marquee>
@@ -25,10 +33,10 @@
       <?php
       $do = $_GET['do'] ?? 'main';
       $file = "./front/" . $do . '.php';
-      if(file_exists($file)){
+      if (file_exists($file)) {
         include $file;
-      }else{
-        include "./backend/main.php";
+      } else {
+        include "./front/main.php";
       }
       ?>
     </div>
