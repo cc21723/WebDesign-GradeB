@@ -152,7 +152,7 @@
                 <a href="?do=date" class="menu-ajax" data-page="date">預約時間圖</a>
                 <a href="?do=admin" class="menu-ajax" data-page="admin">使用者管理</a>
             </div>
-            <a href="logout.php" class="logout">登出</a>
+            <a href="./api/logout.php" class="logout">登出</a>
         </div>
 
         <main id="main-content" class="main-content">
