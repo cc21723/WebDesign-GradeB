@@ -1,5 +1,5 @@
 <?php
-session_start();
+// session_start();
 include_once '../api/db.php';
 
 
@@ -20,7 +20,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     if ($user && $password === $user['pw']) {
         $_SESSION['admin'] = $user['id'];
 
-        header("Location: ../backend/dashboard.php");
+        header("Location: ../dashboard.php");
         exit;
     } else {
         $error = "帳號或密碼錯誤";
