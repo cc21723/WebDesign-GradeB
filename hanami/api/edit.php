@@ -25,8 +25,19 @@ foreach ($ids as $idx => $id) {
         continue;
     }
 
-    // ✅ 取得文字欄位，欄位名稱可能是 title 或 text
-    $textCol = ($table === 'product') ? 'title' : 'text';
+    switch ($table) {
+        case 'product':
+        case 'place':
+        case 'date':
+            $textCol = 'title';
+            break;
+        case 'user':
+            $textCol = 'acc'; 
+            break;
+        default:
+            exit('未知的資料表結構');
+    }
+  
     $text = $_POST['text'][$idx] ?? '';
 
     // ✅ 是否顯示
@@ -37,4 +48,3 @@ foreach ($ids as $idx => $id) {
 }
 
 header("Location: ../dashboard.php?do={$table}");
-?>

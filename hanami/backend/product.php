@@ -31,7 +31,7 @@ $images = $stmt->fetchAll();
             <th>操作</th>
         </tr>
         <?php
-        // $rows = $Product->all();
+        $rows = $Product->all();
         foreach ($rows as $row):
         ?>
             <tr>
