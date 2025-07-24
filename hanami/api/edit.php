@@ -4,8 +4,9 @@ include_once "db.php";
 $table = $_POST['table'] ?? '';
 $ids = $_POST['id'] ?? [];
 
+echo ($table);
 // ✅ 限定允許的資料表
-$allowTables = ['product', 'place', 'reserve'];
+$allowTables = ['product', 'place', 'reserve', 'users'];
 if (!in_array($table, $allowTables)) {
     exit("非法資料表！");
 }
@@ -37,9 +38,13 @@ foreach ($ids as $idx => $id) {
         case 'reserve':
             $textCol = 'title';
             break;
+        case 'users':
+            $textCol = 'acc';
+            break;
         default:
             exit('未知的資料表結構');
     }
+
 
     $text = $_POST['text'][$idx] ?? '';
 
@@ -52,9 +57,23 @@ foreach ($ids as $idx => $id) {
         $sh = (isset($_POST['sh']) && in_array($id, $_POST['sh'])) ? 1 : 0;
     }
 
-    // ✅ 執行更新
-    $sql = "UPDATE `$table` SET `$textCol`=?, `sh`=? WHERE `id`=?";
-    $pdo->prepare($sql)->execute([$text, $sh, $id]);
+    if ($table == 'users') {
+        $acc = $_POST['acc'][$idx] ?? '';
+        $pw = $_POST['pw'][$idx] ?? '';
+
+        if ($pw === '') {
+            $sql = "UPDATE `$table` SET `acc`=? WHERE `id`=?";
+            $pdo->prepare($sql)->execute([$acc, $id]);
+        } else {
+            // $pw = password_hash($pw, PASSWORD_DEFAULT);
+            $sql = "UPDATE `$table` SET `acc`=?, `pw`=? WHERE `id`=?";
+            $pdo->prepare($sql)->execute([$acc, $pw, $id]);
+        }
+    } else {
+        // ✅ 執行更新
+        $sql = "UPDATE `$table` SET `$textCol`=?, `sh`=? WHERE `id`=?";
+        $pdo->prepare($sql)->execute([$text, $sh, $id]);
+    }
 }
 
 // ✅ 回到對應頁面

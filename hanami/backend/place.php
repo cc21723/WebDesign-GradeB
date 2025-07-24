@@ -1,5 +1,9 @@
 <?php
 include_once __DIR__ . '/../api/db.php';
+include_once __DIR__ . '/../api/paginate.php';
+
+list($rows, $totalPages) = paginate("product");
+$page = $_GET['page'] ?? 1;
 ?>
 
 <table>
