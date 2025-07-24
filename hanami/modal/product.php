@@ -17,14 +17,18 @@ include_once '../api/db.php';
         background-color: #e57373;
     }
 </style>
-<form action="/api/insert.php" method="post" enctype="multipart/form-data">
+
+<form action="./api/insert.php" method="post" enctype="multipart/form-data">
     <input type="hidden" name="table" value="product">
     <div class="mb-2">
         <label>選擇圖片：</label>
         <input type="file" name="image" class="form-control" required>
     </div>
+    <div class="mb-2">
+        <label>名稱：</label>
+        <input type="text" name="title" class="form-control">
+    </div>
     <div class="text-end">
         <button type="submit" class="btn btn-pink">上傳</button>
     </div>
 </form>
-<button onclick="document.getElementById('cover').style.display='none'" style="position:absolute; top:10px; right:10px; background:none; border:none; font-size:24px; cursor:pointer;">✖</button>

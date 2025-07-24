@@ -1,6 +1,6 @@
 <?php
 // 啟用 session
-session_start();
+// session_start();
 
 //設定時區
 date_default_timezone_set("Asia/Taipei");
@@ -153,6 +153,6 @@ class DB
 $Product = new DB('product');
 $Place = new DB('place');
 $Date = new DB('date');
-$Admin = new DB('admin');
+$User = new DB('users');
 
 ?>

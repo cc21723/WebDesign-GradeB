@@ -19,10 +19,12 @@
             min-height: 100vh;
         }
 
-        h3 {
+        h3, h3 a {
             text-align: center;
             color: #e57373;
             margin: 10px 0;
+            text-decoration: none;
+            display: block;
         }
 
         .sidebar {
@@ -138,13 +140,54 @@
         input[type="button"]:hover {
             background-color: #e57373;
         }
+
+        /* 美化分頁元件 */
+        .pagination {
+            justify-content: center;
+            margin-top: 30px;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+
+        .pagination .page-item {
+            border-radius: 10px;
+            overflow: hidden;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .pagination .page-link {
+            border: none;
+            background-color: #fceff1;
+            /* 淺粉色 */
+            color: #d75d75;
+            /* 主色文字 */
+            font-weight: bold;
+            padding: 8px 16px;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .pagination .page-link:hover {
+            background-color: #f9d9de;
+            color: #a02f4d;
+            text-decoration: none;
+        }
+
+        .pagination .page-item.active .page-link {
+            background-color: #e16b8c;
+            /* 主色 */
+            color: white;
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+            transform: scale(1.05);
+        }
     </style>
 </head>
 
 <body>
     <div class="wrapper">
         <div class="sidebar">
-            <h3>後台管理</h3>
+            <h3><a href="./dashboard.php">後台管理</a></h3>
             <div class="menu">
                 <a href="?do=main" class="menu-ajax" data-page="main">後台首頁</a>
                 <a href="?do=product" class="menu-ajax" data-page="product">作品集照片</a>
@@ -179,13 +222,30 @@
         $(document).ready(function() {
             $(".menu-ajax").on("click", function(e) {
                 e.preventDefault();
+
                 const page = $(this).data("page");
+                const url = `dashboard.php?do=${page}`;
+
+                history.pushState(null, null, url); // ✅ 更新網址
+
                 $("#main-content").fadeOut(100, function() {
-                    $("#main-content").load("./backend/" + page + ".php", function() {
+                    $("#main-content").load(`./backend/${page}.php`, function() {
                         $("#main-content").fadeIn(200);
                     });
                 });
             });
+
+            // ✅ 處理瀏覽器返回/前進按鈕的情況
+            window.onpopstate = function() {
+                const urlParams = new URLSearchParams(window.location.search);
+                const page = urlParams.get('do') || 'main';
+
+                $("#main-content").fadeOut(100, function() {
+                    $("#main-content").load(`./backend/${page}.php`, function() {
+                        $("#main-content").fadeIn(200);
+                    });
+                });
+            };
         });
     </script>
 </body>

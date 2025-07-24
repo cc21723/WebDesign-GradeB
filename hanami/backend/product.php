@@ -1,57 +1,83 @@
 <?php
-include_once '../api/db.php';
+include_once __DIR__ . '/../api/db.php';
+include_once __DIR__ . '/../api/paginate.php';
+
+list($rows, $totalPages) = paginate("product");
+$page = $_GET['page'] ?? 1;
 
 // 取得所有圖片
 $stmt = $pdo->query("SELECT * FROM product ORDER BY uploaded_at DESC");
 $images = $stmt->fetchAll();
 ?>
 
-<h3>作品集圖片管理</h3>
 <table>
     <tr>
-        <th>圖片</th>
-        <th>名稱</th>
-        <th>顯示</th>
-        <th>操作</th>
+        <td></td>
+        <td>
+            <h3>作品集圖片管理</h3>
+        </td>
+        <td width="200px">
+            <input type="hidden" name="table" value="product">
+            <input type="button" onclick="op('#cover', '#cvr', './modal/product.php')" value="新增作品集圖片">
+        </td>
     </tr>
-    <?php
-    $rows = $Product->all();
-    foreach ($rows as $row):
-    ?>
-        <tr>
-            <td>
-                <img src="./images/<?= $row['img']; ?>" style="width:100px; border-radius: 8px;">
-            </td>
-
-            <td>
-                <input type="text" name="text[]" value="<?= $row['title']; ?>" style="width:90%;">
-            </td>
-            <td style="padding-left: 15px;">
-                <input type="checkbox" name="sh[]" value="<?= $row['id']; ?>" <?= ($row['sh'] == 1) ? "checked" : ""; ?>>
-            </td>
-            <td style="padding-left: 15px;">
-                <input type="checkbox" name="del[]" value="<?= $row['id']; ?>">
-            </td>
-        </tr>
-        <input type="hidden" name="id[]" value="<?= $row['id']; ?>">
-    <?php endforeach; ?>
 </table>
-
-<table>
-    <tbody>
+<form action="./api/edit.php" method="post">
+    <table>
         <tr>
-            <td width="200px">
-                <input type="hidden" name="table" value="product">
-                <input type="button" onclick="op('#cover', '#cvr', './modal/product.php')" value="新增作品集圖片">
-            </td>
-            <td class="cent">
-                <input type="submit" value="修改確定">
-                <input type="reset" value="重置">
-            </td>
+            <th>圖片</th>
+            <th>名稱</th>
+            <th>顯示</th>
+            <th>操作</th>
         </tr>
-    </tbody>
-</table>
+        <?php
+        // $rows = $Product->all();
+        foreach ($rows as $row):
+        ?>
+            <tr>
+                <td>
+                    <img src="./images/<?= $row['img']; ?>" style="width:100px; border-radius: 8px;">
+                </td>
 
+                <td>
+                    <input type="text" name="text[]" value="<?= $row['title']; ?>" style="width:90%;">
+                </td>
+                <td style="padding-left: 15px;">
+                    <input type="checkbox" name="sh[]" value="<?= $row['id']; ?>" <?= ($row['sh'] == 1) ? "checked" : ""; ?>>
+                </td>
+                <td style="padding-left: 15px;">
+                    <input type="checkbox" name="del[]" value="<?= $row['id']; ?>">
+                </td>
+            </tr>
+            <input type="hidden" name="id[]" value="<?= $row['id']; ?>">
+            <input type="hidden" name="table" value="product">
+        <?php endforeach; ?>
+    </table>
+
+    <!-- 分頁 UI -->
+    <nav>
+        <ul class="pagination">
+            <?php for ($i = 1; $i <= $totalPages; $i++): ?>
+                <li class="page-item <?= ($page == $i) ? 'active' : '' ?>">
+                    <a class="page-link page-ajax" href="?do=product&page=<?= $i ?>" data-page="product&page=<?= $i ?>">
+                        <?= $i ?>
+                    </a>
+                </li>
+            <?php endfor; ?>
+        </ul>
+    </nav>
+
+    <table>
+        <tbody>
+            <tr>
+                <td class="text-center">
+                    <input type="submit" value="修改確定">
+                    <input type="reset" value="重置">
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</form>
 
 <!-- 遮罩與彈窗容器 -->
 <div id="cover" style="position: fixed; top:0; left:0; width:100%; height:100%; background-color: rgba(0,0,0,0.5); display:none; z-index: 1000;">
@@ -79,5 +105,6 @@ $images = $stmt->fetchAll();
                 cvr.innerHTML = '';
             }
         });
+
     }
 </script>

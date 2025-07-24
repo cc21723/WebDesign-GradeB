@@ -5,13 +5,25 @@ include_once '../api/db.php';
 $stmt = $pdo->query("SELECT * FROM date ORDER BY uploaded_at DESC");
 $images = $stmt->fetchAll();
 ?>
-<h3>預約時間圖片管理</h3>
+<table>
+    <tr>
+        <td></td>
+        <td>
+            <h3>預約時間圖片管理</h3>
+        </td>
+        <td width="200px">
+            <input type="hidden" name="table" value="date">
+            <input type="button" onclick="op('#cover', '#cvr', './modal/date.php')" value="新增作品集圖片">
+        </td>
+    </tr>
+</table>
+
 <table>
     <tr>
         <th>圖片</th>
         <th>名稱</th>
         <th>顯示</th>
-        <th>操作</th>
+        <th>刪除</th>
     </tr>
     <?php
     $rows = $Date->all();
@@ -29,6 +41,7 @@ $images = $stmt->fetchAll();
             </td>
         </tr>
         <input type="hidden" name="id[]" value="<?= $row['id']; ?>">
+        <input type="hidden" name="table" value="product">
     <?php endforeach; ?>
 </table>
 
