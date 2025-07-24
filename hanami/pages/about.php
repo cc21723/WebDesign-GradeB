@@ -1,3 +1,4 @@
+<?php include_once "../api/db.php" ?>
 <style>
   .about-img {
     width: 100%;
@@ -28,7 +29,7 @@
         </article>
 
         <!-- 設備與環境展示 -->
-        <article class="mb-5">
+        <!-- <article class="mb-5">
             <h3>設備與環境展示</h3>
             <div class="row g-3">
                 <div class="col-md-4">
@@ -44,7 +45,24 @@
                         class="about-img img-fluid rounded shadow-sm">
                 </div>
             </div>
-        </article>
+        </article> -->
+         <article class="mb-5">
+              <h3>設備與環境展示</h3>
+              <?php
+                $rows = $Place->all();
+                foreach ($rows as $row):
+                    // dd($row);
+
+                ?>
+                <div class="row g-3">
+                  <div class="col-md-4">
+                    <img src="./images/<?= $row['img']; ?>" class="about-img img-fluid rounded shadow-sm" alt="工作室環境">
+                  </div>
+              </div>
+                
+              <?php endforeach; ?>
+              
+          </article>
 
         <!-- 服務流程 -->
         <article class="mb-5">
