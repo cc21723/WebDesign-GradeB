@@ -1,3 +1,4 @@
+<?php include_once "../api/db.php" ?>
 <div class="row">
     <!-- 左：預約表單 -->
     <div class="col-md-7">
@@ -70,8 +71,21 @@
         </p>
         <p class="mt-3" style="font-size: 1rem; color: #666;">若臨時取消請提前至少24小時告知，感謝您的配合。</p>
 
-        <img src="https://i.pinimg.com/736x/e8/34/73/e834738634c757b09ec48013e304a52e.jpg" alt="預約時段說明"
-            class="img-fluid rounded shadow-sm">
+        <?php
+                $rows = $Reserve->all();
+                foreach ($rows as $row):
+                    // dd($row);
+
+                ?>
+                <div class="row g-3">
+                  <div class="col-md-4">
+                    <img src="./images/<?= $row['img']; ?>" class="img-fluid rounded shadow-sm" alt="預約時段說明">
+                  </div>
+              </div>
+                
+              <?php endforeach; ?>
+        <!-- <img src="https://i.pinimg.com/736x/e8/34/73/e834738634c757b09ec48013e304a52e.jpg" alt="預約時段說明"
+            class="img-fluid rounded shadow-sm"> -->
     </div>
 </div>
 
