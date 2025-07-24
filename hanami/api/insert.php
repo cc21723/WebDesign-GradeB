@@ -19,3 +19,4 @@ if (isset($_FILES['image'])) {
 } else {
     echo "沒收到檔案";
 }
+

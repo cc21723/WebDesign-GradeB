@@ -19,7 +19,7 @@ include_once '../api/db.php';
 </style>
 
 <form action="./api/insert.php" method="post" enctype="multipart/form-data">
-    <input type="hidden" name="table" value="date">
+    <input type="hidden" name="table" value="reserve">
     <div class="mb-2">
         <label>選擇圖片：</label>
         <input type="file" name="image" class="form-control" required>

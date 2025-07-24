@@ -58,7 +58,7 @@ class DB
 
     function all(...$arg)
     {
-        $sql = "select * from $this->table";
+        $sql = "select * from $this->table ORDER BY created_at DESC ";
         if (isset($arg[0])) {
             if (is_array($arg[0])) {
                 $tmp = $this->arraytosql($arg[0]);
@@ -152,7 +152,7 @@ class DB
 
 $Product = new DB('product');
 $Place = new DB('place');
-$Date = new DB('date');
+$Reserve = new DB('reserve');
 $User = new DB('users');
 
 ?>

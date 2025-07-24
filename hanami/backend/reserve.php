@@ -1,8 +1,9 @@
+
 <?php
 include_once __DIR__ . '/../api/db.php';
 include_once __DIR__ . '/../api/paginate.php';
 
-list($rows, $totalPages) = paginate("product");
+list($rows, $totalPages) = paginate("reserve");
 $page = $_GET['page'] ?? 1;
 ?>
 
@@ -10,11 +11,11 @@ $page = $_GET['page'] ?? 1;
     <tr>
         <td></td>
         <td>
-            <h3>作品集圖片管理</h3>
+            <h3>預約時間圖片管理</h3>
         </td>
         <td width="200px">
-            <input type="hidden" name="table" value="product">
-            <input type="button" onclick="op('#cover', '#cvr', './modal/product.php')" value="新增作品集圖片">
+            <input type="hidden" name="table" value="reserve">
+            <input type="button" onclick="op('#cover', '#cvr', './modal/reserve.php')" value="新增預約時間圖片">
         </td>
     </tr>
 </table>
@@ -27,7 +28,7 @@ $page = $_GET['page'] ?? 1;
             <th>刪除</th>
         </tr>
         <?php
-        $rows = $Product->all();
+        $rows = $Reserve->all();
         foreach ($rows as $row):
         ?>
             <tr>
@@ -39,14 +40,14 @@ $page = $_GET['page'] ?? 1;
                     <input type="text" name="text[]" value="<?= $row['title']; ?>" style="width:90%;">
                 </td>
                 <td style="padding-left: 15px;">
-                    <input type="checkbox" name="sh[]" value="<?= $row['id']; ?>" <?= ($row['sh'] == 1) ? "checked" : ""; ?>>
+                    <input type="radio" name="sh" value="<?= $row['id']; ?>" <?= ($row['sh'] == 1) ? "checked" : ""; ?>>
                 </td>
                 <td style="padding-left: 15px;">
                     <input type="checkbox" name="del[]" value="<?= $row['id']; ?>">
                 </td>
             </tr>
             <input type="hidden" name="id[]" value="<?= $row['id']; ?>">
-            <input type="hidden" name="table" value="product">
+            <input type="hidden" name="table" value="reserve">
         <?php endforeach; ?>
     </table>
 
@@ -55,7 +56,7 @@ $page = $_GET['page'] ?? 1;
         <ul class="pagination">
             <?php for ($i = 1; $i <= $totalPages; $i++): ?>
                 <li class="page-item <?= ($page == $i) ? 'active' : '' ?>">
-                    <a class="page-link page-ajax" href="?do=product&page=<?= $i ?>" data-page="product&page=<?= $i ?>">
+                    <a class="page-link page-ajax" href="?do=reserve&page=<?= $i ?>" data-page="reserve&page=<?= $i ?>">
                         <?= $i ?>
                     </a>
                 </li>

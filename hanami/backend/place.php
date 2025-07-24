@@ -1,9 +1,5 @@
 <?php
 include_once __DIR__ . '/../api/db.php';
-
-// 取得所有圖片
-$stmt = $pdo->query("SELECT * FROM place ORDER BY uploaded_at DESC");
-$images = $stmt->fetchAll();
 ?>
 
 <table>

@@ -192,8 +192,8 @@
                 <a href="?do=main" class="menu-ajax" data-page="main">後台首頁</a>
                 <a href="?do=product" class="menu-ajax" data-page="product">作品集照片</a>
                 <a href="?do=place" class="menu-ajax" data-page="place">環境/設備照片</a>
-                <a href="?do=date" class="menu-ajax" data-page="date">預約時間圖</a>
-                <a href="?do=admin" class="menu-ajax" data-page="admin">使用者管理</a>
+                <a href="?do=reserve" class="menu-ajax" data-page="reserve">預約時間圖片</a>
+                <a href="?do=users" class="menu-ajax" data-page="users">使用者管理</a>
             </div>
             <a href="./api/logout.php" class="logout">登出</a>
         </div>
