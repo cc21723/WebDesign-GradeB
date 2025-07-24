@@ -58,7 +58,7 @@ class DB
 
     function all(...$arg)
     {
-        $sql = "select * from $this->table ORDER BY created_at DESC ";
+        $sql = "select * from $this->table";
         if (isset($arg[0])) {
             if (is_array($arg[0])) {
                 $tmp = $this->arraytosql($arg[0]);

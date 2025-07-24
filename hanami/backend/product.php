@@ -27,7 +27,7 @@ $page = $_GET['page'] ?? 1;
             <th>刪除</th>
         </tr>
         <?php
-        $rows = $Product->all();
+        $rows = $Product->all(" ORDER BY created_at DESC ");
         foreach ($rows as $row):
         ?>
             <tr>

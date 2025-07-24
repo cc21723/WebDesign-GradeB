@@ -23,7 +23,7 @@ include_once __DIR__ . '/../api/db.php';
         <th>刪除</th>
     </tr>
     <?php
-    $rows = $Place->all();
+    $rows = $Place->all(" ORDER BY created_at DESC ");
     foreach ($rows as $row):
     ?>
         <tr>
