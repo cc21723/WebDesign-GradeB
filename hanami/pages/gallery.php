@@ -1,3 +1,5 @@
+  <?php include_once "../api/db.php" ?>
+
   <div class="container my-5">
     <h2 class="text-center mb-4">作品集</h2>
 
@@ -13,22 +15,39 @@
 
     <!-- 圖片區 -->
     <div class="row g-3" id="gallery">
-      <!-- 手部美甲 A -->
-      <div class="col-sm-6 col-md-4 gallery-item nail-a">
-        <img src="https://i.pinimg.com/736x/f3/f3/37/f3f33710f28d055bf48b08ed5b06d9db.jpg" class="img-fluid rounded" alt="預算設計 A1">
-      </div>
-      <div class="col-sm-6 col-md-4 gallery-item nail-a">
-        <img src="https://i.pinimg.com/736x/2b/22/b3/2b22b3f9a1a782886120c8babdd95682.jpg" class="img-fluid rounded" alt="預算設計 A2">
-      </div>
+      <?php
+      $rows = $Product->all();
+      foreach ($rows as $row):
+        // dd($row);
+        // 根據 alt 決定分類類別 class
+        $altClass = '';
+        switch ($row['alt']) {
+          case '預算設計 A':
+            $altClass = 'nail-a';
+            break;
+          case '預算設計 B':
+            $altClass = 'nail-b';
+            break;
+          case '熱蠟除毛':
+            $altClass = 'wax';
+            break;
+          case '臉部保養':
+            $altClass = 'face';
+            break;
+          case '艾草溫罐':
+            $altClass = 'moxa';
+            break;
+          default:
+            $altClass = 'other'; // fallback 類別
+            break;
+        }
+      ?>
+        <div class="col-sm-6 col-md-4 gallery-item <?= $altClass ?>">
+          <img src="./images/<?= $row['img']; ?>" class="img-fluid rounded" alt="<?= $row['alt']; ?>">
+        </div>
+      <?php endforeach; ?>
 
-      <!-- 手部美甲 B -->
-      <div class="col-sm-6 col-md-4 gallery-item nail-b">
-        <img src="https://i.pinimg.com/736x/18/31/1f/18311f8a6b2fe1c282f57bd89904c6e1.jpg" class="img-fluid rounded" alt="預算設計 B1">
-      </div>
-      <div class="col-sm-6 col-md-4 gallery-item nail-b">
-        <img src="https://i.pinimg.com/736x/50/38/76/503876efab9c6bb633f86137dbee0f57.jpg" class="img-fluid rounded" alt="預算設計 B1">
-      </div>
-
+      <!-- 下面要拿掉 -->
       <!-- 熱蠟除毛 -->
       <div class="col-sm-6 col-md-4 gallery-item wax">
         <img src="https://i.pinimg.com/736x/f6/8d/1f/f68d1f063b3ccae104a49a988b769e08.jpg" class="img-fluid rounded" alt="熱蠟除毛">
@@ -47,11 +66,12 @@
         <img src="https://i.pinimg.com/736x/f6/5a/6b/f65a6b0b3704ed8716bb67e680b780ec.jpg" class="img-fluid rounded" alt="艾草溫罐">
       </div>
     </div>
+
   </div>
 
   <script>
-    $(function () {
-      $(".filter-btn").click(function () {
+    $(function() {
+      $(".filter-btn").click(function() {
         const filter = $(this).data("filter");
         if (filter === "all") {
           $(".gallery-item").show();
@@ -62,4 +82,3 @@
       });
     });
   </script>
-

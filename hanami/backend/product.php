@@ -23,6 +23,7 @@ $page = $_GET['page'] ?? 1;
         <tr>
             <th>圖片</th>
             <th>名稱</th>
+            <th>分類</th>
             <th>顯示</th>
             <th>刪除</th>
         </tr>
@@ -37,6 +38,9 @@ $page = $_GET['page'] ?? 1;
 
                 <td>
                     <input type="text" name="text[]" value="<?= $row['title']; ?>" style="width:90%;">
+                </td>
+                <td>
+                    <input type="text" name="alt[]" value="<?= $row['alt']; ?>" style="width:90%;">
                 </td>
                 <td style="padding-left: 15px;">
                     <input type="checkbox" name="sh[]" value="<?= $row['id']; ?>" <?= ($row['sh'] == 1) ? "checked" : ""; ?>>

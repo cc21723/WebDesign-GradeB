@@ -13,9 +13,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $stmt->execute([$username]);
     $user = $stmt->fetch();
 
-    echo ($username);
-    echo ($password);
-
     // if ($user && password_verify($password, $user['pw'])) {
     if ($user && $password === $user['pw']) {
         $_SESSION['admin'] = $user['id'];

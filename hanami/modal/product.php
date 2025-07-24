@@ -28,6 +28,10 @@ include_once '../api/db.php';
         <label>名稱：</label>
         <input type="text" name="title" class="form-control">
     </div>
+    <div class="mb-2">
+        <label>分類：</label>
+        <input type="text" name="alt" class="form-control">
+    </div>
     <div class="text-end">
         <button type="submit" class="btn btn-pink">上傳</button>
     </div>

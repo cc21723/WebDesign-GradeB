@@ -18,12 +18,13 @@ if ($table === 'users') {
     if (isset($_FILES['image'])) {
         $image = $_FILES['image']['name'];
         $tmp_name = $_FILES['image']['tmp_name'];
-        $title = $_POST['title'] ?? ''; // 新增這行取得 title
+        $title = $_POST['title'] ?? ''; 
+        $alt = $_POST['alt'] ?? ''; 
 
         if ($image && move_uploaded_file($tmp_name, "../images/" . $image)) {
-            $sql = "INSERT INTO `$table` (`img`, `title`, `uploaded_at`) VALUES (?, ?, NOW())";
+            $sql = "INSERT INTO `$table` (`img`, `title`, `alt`, `uploaded_at`) VALUES (?, ?, ?, NOW())";
             // $sql = "INSERT INTO `product` (`img`, `uploaded_at`) VALUES (?, ?, NOW())";
-            $pdo->prepare($sql)->execute([$image, $title]);
+            $pdo->prepare($sql)->execute([$image, $title, $alt]);
             header("Location: ../dashboard.php?do={$table}");
         } else {
             echo "上傳失敗";
