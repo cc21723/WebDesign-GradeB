@@ -49,10 +49,9 @@
          <article class="mb-5">
               <h3>設備與環境展示</h3>
               <?php
-                $rows = $Place->all();
+                $rows = $Place->all(['sh'=>1]);
                 foreach ($rows as $row):
                     // dd($row);
-
                 ?>
                 <div class="row g-3">
                   <div class="col-md-4">
