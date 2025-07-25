@@ -54,14 +54,16 @@
             height: 220px;
 
         }
-        .poster-btn{
+
+        .poster-btn {
             width: 80px;
             height: 100px;
             display: inline-block;
             flex-shrink: 0;
             position: relative;
         }
-        .poster-btn img{
+
+        .poster-btn img {
             width: 70px;
             height: 90px;
         }
@@ -108,25 +110,46 @@
         let rank = 0;
         $(".poster").eq(rank).show();
         let slider = setInterval(() => {
-
-            //只能輪播
-            // rank++;
-            // if(rank>$(".poster").length-1){
-            //     rank = 0;
-            // }
-            // $(".poster").hide();
-            // $(".poster").eq(rank).show();
-
-            animater();
-
-        }, 2000)
-
-        function animater() {
-            let now = $(".poster:visible");
             rank++;
             if (rank > $(".poster").length - 1) {
                 rank = 0;
             }
+            animater(rank);
+
+            //只能輪播
+            // $(".poster").hide();
+            // $(".poster").eq(rank).show();
+            // animater();
+
+        }, 2000)
+
+        //滑鼠移到縮圖區時暫停上面動畫
+        $(".btns").hover(
+            function() {
+                clearInterval(slider);
+            },
+            function() {
+                slider = setInterval(() => {
+                    animater();
+                }, 2000);
+            }
+        )
+        $(".poster-btn").on("click", function() {
+            let idx = $(this).index();
+            animater(idx);
+        })
+
+        function animater(r) {
+            let now = $(".poster:visible");
+
+            if (r == undefined) {
+                rank++;
+                if (rank > $(".poster").length - 1) {
+                    rank = 0;
+                }
+            } else {
+                rank = r;
+            };
 
             let next = $(".poster").eq(rank);
             let ani = $(now).data('ani');
@@ -152,24 +175,24 @@
         }
 
         let p = 0;
-        $(".left,.right").on("click",function () { 
+        $(".left,.right").on("click", function() {
             let arrow = $(this).attr('class');
             switch (arrow) {
                 case 'left':
-                    if(p>0){
+                    if (p > 0) {
                         p--;
                     }
                     break;
-                 case 'right':
-                    if(p<$(".poster-btn").length-4){
+                case 'right':
+                    if (p < $(".poster-btn").length - 4) {
                         p++;
                     }
                     break;
             }
-            $(".poster-btn").animate({right:p*80},500);
-         })
-
-
+            $(".poster-btn").animate({
+                right: p * 80
+            }, 500);
+        })
     </script>
 
 
