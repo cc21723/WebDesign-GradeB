@@ -59,6 +59,7 @@
             height: 100px;
             display: inline-block;
             flex-shrink: 0;
+            position: relative;
         }
         .poster-btn img{
             width: 70px;
@@ -149,6 +150,26 @@
             }
 
         }
+
+        let p = 0;
+        $(".left,.right").on("click",function () { 
+            let arrow = $(this).attr('class');
+            switch (arrow) {
+                case 'left':
+                    if(p>0){
+                        p--;
+                    }
+                    break;
+                 case 'right':
+                    if(p<$(".poster-btn").length-4){
+                        p++;
+                    }
+                    break;
+            }
+            $(".poster-btn").animate({right:p*80},500);
+         })
+
+
     </script>
 
 
