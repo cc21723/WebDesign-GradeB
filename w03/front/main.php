@@ -86,7 +86,16 @@ $posters = $Poster->all(['sh' => 1], " order by `rank` ");
     </div>
 </div>
 <script>
-    $(".poster").eq(0).show()
+    let rank = 0;
+    $(".poster").eq(rank).show();
+    let slider = setInterval(()=>{
+        rank++;
+        if(rank>$(".poster").length-1){
+            rank = 0;
+        }
+        $(".poster").hide();
+        $(".poster").eq(rank).show();
+    },2000)
 </script>
 <div class="half">
     <h1>院線片清單</h1>
