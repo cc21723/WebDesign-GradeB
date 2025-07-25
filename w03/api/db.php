@@ -207,6 +207,7 @@ $User->save(['acc'=>'mem02','pw'=>'mem02','email'=>'mem02@labor.gov.tw'])
  */
 
 $Poster = new DB('posters');
+$Movie = new DB('movies');
 
 
 
