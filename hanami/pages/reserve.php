@@ -72,33 +72,31 @@
         <p class="mt-3" style="font-size: 1rem; color: #666;">若臨時取消請提前至少24小時告知，感謝您的配合。</p>
 
         <?php
-                $rows = $Reserve->all();
-                foreach ($rows as $row):
-                    // dd($row);
-
-                ?>
-                <div class="row g-3">
-                  <div class="col-md-4">
+        $row = $Reserve->find(['sh' => 1]);
+        if ($row):
+        ?>
+            <div class="row g-3">
+                <div class="col-md-12">
                     <img src="./images/<?= $row['img']; ?>" class="img-fluid rounded shadow-sm" alt="預約時段說明">
-                  </div>
-              </div>
-                
-              <?php endforeach; ?>
+                </div>
+            </div>
+
+        <?php endif; ?>
         <!-- <img src="https://i.pinimg.com/736x/e8/34/73/e834738634c757b09ec48013e304a52e.jpg" alt="預約時段說明"
             class="img-fluid rounded shadow-sm"> -->
     </div>
 </div>
 
 <script>
-  $(function () {
-    $('#bookingForm').on('submit', function (e) {
-      e.preventDefault(); // 阻止表單真正送出
+    $(function() {
+        $('#bookingForm').on('submit', function(e) {
+            e.preventDefault(); // 阻止表單真正送出
 
-      // 模擬成功（你也可以在這裡加入 Ajax 傳送）
-      $('#successModal').modal('show');
+            // 模擬成功（你也可以在這裡加入 Ajax 傳送）
+            $('#successModal').modal('show');
 
-      // 如果你要清空表單可以加這行
-      this.reset();
+            // 如果你要清空表單可以加這行
+            this.reset();
+        });
     });
-  });
 </script>
