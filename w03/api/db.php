@@ -199,14 +199,21 @@ class DB
 
 
     private function arraytosql($array)
-    {
-        $tmp = [];
-        foreach ($array as $key => $value) {
-            $tmp[] = "`$key`='$value'";
-        }
+{
+    // 宣告一個空陣列，用來儲存每個欄位的 SQL 字串格式
+    $tmp = [];
 
-        return $tmp;
+    // 遍歷傳入的關聯式陣列，例如 ['name' => 'Amy', 'age' => 25]
+    foreach ($array as $key => $value) {
+        // 將每個鍵值組合成 SQL 中的欄位更新語法，例如 `name`='Amy'
+        // 並加到 $tmp 陣列中
+        $tmp[] = "`$key`='$value'";
     }
+
+    // 回傳轉換後的 SQL 語法陣列，例如：
+    // ["`name`='Amy'", "`age`='25'"]
+    return $tmp;
+}
 }
 
 
