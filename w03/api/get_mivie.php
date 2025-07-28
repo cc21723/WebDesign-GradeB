@@ -8,6 +8,9 @@ $ondate = date("Y-m-d", strtotime("-2 days", strtotime($today)));
 $movies = $Movie->all(['sh' => 1], " and ondate between '$ondate' and '$today' order by `rank`");
 
 foreach($movise as $movie){
-    $selected = ($id==$movie['id']);
+    $selected = ($id==$movie['id'])?'selected':'';
+    echo "<option value='{$movie['id']}' $selected>";
+    echo $movie['name'];
+    echo "<option>";
 
 }

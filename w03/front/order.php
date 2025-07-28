@@ -65,4 +65,5 @@
             $("#movie").html(movies);
         })
      }
+     
 </script>
