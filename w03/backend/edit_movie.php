@@ -80,7 +80,7 @@
         <div style="display: flex;">
             <div>劇情簡介</div>
             <div>
-                <textarea name="intro" id="intro" value="<?= $movie['intro']; ?>"></textarea>
+                <textarea name="intro" id="intro"><?= $movie['intro']; ?></textarea>
             </div>
         </div>
         <input type="hidden" name="id" value="<?= $movie['id']; ?>">
