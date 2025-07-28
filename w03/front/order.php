@@ -61,9 +61,9 @@
             id = url.get('id');
         }
 
-        $.get("./api/get_mivie.php",{id},(movies)=>{
+        $.get("./api/get_movie.php",{id},(movies)=>{
             $("#movie").html(movies);
         })
      }
-     
+
 </script>
