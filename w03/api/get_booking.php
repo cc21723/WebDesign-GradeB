@@ -37,13 +37,21 @@
         bottom: 5px;
         right: 5px;
     }
+    .booked{
+        background: url("./icon/03D03.png") no-repeat center;
+    }
+    .null{
+        background: url("./icon/03D02.png") no-repeat center;
+    }
 </style>
 <div class="booking-box">
     <div id="seats">
         <?php
         for ($i = 0; $i < 20; $i++):
+
+            $booked = 'null';
         ?>
-            <div class="seat">
+            <div class="seat <?=$booked;?>">
                 <div><?= floor($i / 5) + 1; ?>排<?= floor($i % 5) + 1; ?>號</div>
                 <input type="checkbox" name="seat" id="<?= $i; ?>">
             </div>
@@ -51,8 +59,9 @@
         endfor;
         ?>
     </div>
-
 </div>
+
+
 <div class="info-box">
     <div class="order-info">
         <div>您選擇的電影是：</div>
