@@ -45,9 +45,7 @@
 </div>
 
 <div id="booking" style="display: none;">
-    畫位
-    <button class="btn-prev">上一步</button>
-    <button class="btn-order">訂購</button>
+
 </div>
 
 <script>
@@ -63,15 +61,27 @@
     })
 
     //按鈕切換
-    $(".btn-submit").on("click",function(){
+    $(".btn-submit").on("click", function() {
+        //撈資料放在order
+        $.get("./api/get_booking.php", {
+            id: $("#movie").val(),
+            date: $("#date").val(),
+            session: $("#session").val()
+        }, (booking) => {
+            $("#booking").html(booking);
+
+            $(".btn-prev").on("click", function() {
+                $("#booking").hide();
+                $("#orderForm").show();
+            })
+        })
+
+        //切換表單
         $("#orderForm").hide();
         $("#booking").show();
+
     })
 
-    $(".btn-prev").on("click",function () { 
-        $("#booking").hide();
-        $("#orderForm").show();
-     })
 
 
     function getMovies() {
