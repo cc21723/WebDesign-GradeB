@@ -14,10 +14,11 @@ $order = $Order->find(['no' => $_GET['no']])
         background: #ccc;
     }
 
-    .result-table td:nth-child(1) {
+    .result-table tr:nth-child(even) td:nth-child(1) {
+        background: #aaa;
         width: 20%;
     } 
-    
+
 
 </style>
 <!-- 訂單 -->
@@ -56,7 +57,7 @@ $order = $Order->find(['no' => $_GET['no']])
         <!-- <td></td> -->
     </tr>
     <tr>
-        <td colspan="2">
+        <td colspan="2" class="ct">
             <button onclick="location.href='index.php'">確定</button>
         </td>
         <!-- <td></td> -->
