@@ -53,7 +53,7 @@
         ?>
             <div class="seat <?=$booked;?>">
                 <div><?= floor($i / 5) + 1; ?>排<?= floor($i % 5) + 1; ?>號</div>
-                <input type="checkbox" name="seat" id="<?= $i; ?>">
+                <input type="checkbox" name="seat" value="<?= $i; ?>">
             </div>
         <?php
         endfor;
@@ -74,3 +74,28 @@
         <button class="btn-order">訂購</button>
     </div>
 </div>
+
+<script>
+    let selectedSeats = [];
+    $(".seat input[type='checkbox']").on("change",function () { 
+        console.log($(this).prop("checked"),$(this).val());
+        
+        if($(this).prop("checked")){
+            //點完的當下是否小於4
+            if(selectedSeats.length<4){
+                selectedSeats.push($(this).val());
+                $(this).parent().removeClass("null").addClass("booked");
+            }else{
+                alert("最多只能選擇四張票");
+                $(this).prop("checked",false);
+            }
+        }else{
+            //selectedSeats.indexOf($(this).val()) 找出第幾個
+            selectedSeats.splice(selectedSeats.indexOf($(this).val()),1);
+            $(this).parent().removeClass("booked").addClass("null");
+        }
+        console.log(selectedSeats);
+        //顯示勾選幾張票
+        $("#tickets").text(selectedSeats.length);
+     })
+</script>
