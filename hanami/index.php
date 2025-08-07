@@ -82,7 +82,7 @@ session_start();
 
 
         .hero h1 {
-            font-size: 2.5rem;
+            font-size: 2rem;
             background-color: rgba(255, 204, 229, 0.6);
             padding: 0.6em 1.2em;
             border-radius: 25px;

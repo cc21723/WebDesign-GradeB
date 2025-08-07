@@ -154,5 +154,6 @@ $Product = new DB('product');
 $Place = new DB('place');
 $Reserve = new DB('reserve');
 $User = new DB('users');
+$Todo = new DB('todo')
 
 ?>

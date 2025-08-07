@@ -16,7 +16,7 @@
     <!-- 圖片區 -->
     <div class="row g-3" id="gallery">
       <?php
-      $rows = $Product->all();
+      $rows = $Product->all(['sh' => '1']);
       foreach ($rows as $row):
         // dd($row);
         // 根據 alt 決定分類類別 class
