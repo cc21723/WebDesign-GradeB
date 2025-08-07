@@ -1,7 +1,6 @@
 <?php
-// session_start();
+session_start();
 include_once '../api/db.php';
-
 
 $error = '';
 
@@ -13,16 +12,19 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $stmt->execute([$username]);
     $user = $stmt->fetch();
 
-    // if ($user && password_verify($password, $user['pw'])) {
+    // 建議使用 password_verify（如果你有用 hash）
     if ($user && $password === $user['pw']) {
+        $_SESSION['login'] = true;
         $_SESSION['admin'] = $user['id'];
+        $_SESSION['user'] = $user;
 
-        header("Location: ../dashboard.php");
+        header("Location: /hanami/dashboard.php");
         exit;
     } else {
         $error = "帳號或密碼錯誤";
     }
 }
+
 ?>
 <!DOCTYPE html>
 <html lang="zh-Hant">

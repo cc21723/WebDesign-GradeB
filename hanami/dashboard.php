@@ -189,7 +189,8 @@
         <div class="sidebar">
             <h3><a href="./dashboard.php">後台管理</a></h3>
             <div class="menu">
-                <a href="?do=main" class="menu-ajax" data-page="main">後台首頁</a>
+                <a href="./index.php">前台首頁</a>
+                <!-- <a href="?do=main" class="menu-ajax" data-page="main">後台首頁</a> -->
                 <a href="?do=product" class="menu-ajax" data-page="product">作品集照片</a>
                 <a href="?do=place" class="menu-ajax" data-page="place">環境/設備照片</a>
                 <a href="?do=reserve" class="menu-ajax" data-page="reserve">預約時間圖片</a>

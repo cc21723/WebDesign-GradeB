@@ -1,3 +1,9 @@
+<?php
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+?>
+
 <nav class="navbar navbar-expand-lg">
     <div class="container">
         <a class="navbar-brand" href="index.php">🌸花見漫漫美學🌸</a>
@@ -10,7 +16,17 @@
             <li class="nav-item"><a class="nav-link nav-ajax" data-page="about" href="#">🎀 關於我</a></li>
             <li class="nav-item"><a class="nav-link nav-ajax" data-page="reserve" href="#">✉️預約</a></li>
             <!-- <li class="nav-item"><a class="nav-link" href="../pages/login.php">🔐 管理登入</a></li> -->
-            <li class="nav-item"><a class="nav-link" href="../../hanami/pages/login.php">🔐 管理登入</a></li>
+              <?php
+                if(isset($_SESSION['login'])):
+                ?>
+                <li class="nav-item"><a class="nav-link" href="../../hanami/dashboard.php">🔐 <?=$username?>・返回管理</a></li>
+                <?php
+                else:
+                ?>
+                <li class="nav-item"><a class="nav-link" href="../../hanami/pages/login.php">🔐 管理員登入</a></li>
+                <?php
+                endif;
+                ?>
         </ul>
 
     </div>
