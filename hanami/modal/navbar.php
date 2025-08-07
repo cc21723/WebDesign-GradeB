@@ -19,7 +19,7 @@ if (session_status() === PHP_SESSION_NONE) {
               <?php
                 if(isset($_SESSION['login'])):
                 ?>
-                <li class="nav-item"><a class="nav-link" href="../../hanami/dashboard.php">🔐 <?=$username?>・返回管理</a></li>
+                <li class="nav-item"><a class="nav-link" href="../../hanami/dashboard.php">🔐 返回管理</a></li>
                 <?php
                 else:
                 ?>
