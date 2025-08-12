@@ -49,25 +49,56 @@ session_start();
             color: #4a3c38;
         }
 
+        /* 導覽列背景、陰影、圓角 */
         .navbar {
-            background-color: #ffcce0;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            background: linear-gradient(135deg, #fce4ec, #f8bbd0);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+            border-bottom-left-radius: 1rem;
+            border-bottom-right-radius: 1rem;
+            padding: 0.5rem 1rem;
         }
 
-        .navbar-brand {
+        /* 漢堡按鈕邊框與圖示 */
+        .navbar-toggler {
+            border: 2px solid #f8bbd0 !important;
+            border-radius: 0.5rem;
+            background-color: #fff0f5;
+        }
+
+        .navbar-toggler-icon {
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='%23872657' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(135, 38, 87, 0.9)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+        }
+
+        /* 品牌文字 */
+        .navbar-brand{
             font-weight: bold;
-            font-size: 1.5rem;
-            color: #872657;
+            font-size: 1.7rem;
+            color: #872657 !important;
+            letter-spacing: 1px;
+            text-shadow: 1px 1px 2px rgba(255, 192, 203, 0.5);
         }
 
+        /* 導覽連結樣式 */
         .nav-link {
             color: #872657 !important;
+            font-size: 1.1rem;
+            padding: 0.5rem 1rem;
+            transition: all 0.3s ease;
+            border-radius: 0.75rem;
         }
 
+        /* Hover 效果 */
         .nav-link:hover {
+            background: rgba(255, 192, 203, 0.3);
             color: #e16b8c !important;
             transform: scale(1.05);
-            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(225, 107, 140, 0.2);
+        }
+
+        /* 導覽列容器調整排版 */
+        .navbar-nav {
+            align-items: center;
+            justify-content: flex-end;
         }
 
         .hero {

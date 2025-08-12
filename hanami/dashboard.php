@@ -12,130 +12,58 @@ $userName = $user['userName'] ?? '錯誤';
 
 <head>
     <meta charset="UTF-8">
-    <title>🛠️ 後台管理</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- jQuery -->
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <title>花見漫漫｜後台管理</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <!-- Bootstrap -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- Bootstrap 5 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+
     <style>
         body {
-            background-color: #fffafc;
+            background: #fff0f5;
             font-family: 'Segoe UI', sans-serif;
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
         }
 
-        .wrapper {
-            display: flex;
-            min-height: 100vh;
-        }
-
-        h3,
-        h3 a {
-            text-align: center;
-            color: #e57373;
-            margin: 10px 0;
-            text-decoration: none;
-            display: block;
-        }
-
+        /* 左側直欄樣式 */
         .sidebar {
-            width: 220px;
-            min-height: 100vh;
-            height: auto;
-            /* 替代原本固定 height */
             background-color: #fce4ec;
-
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
+            padding: 2rem 1rem;
+            width: 250px;
+            min-height: 100vh;
             box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
         }
 
-        .sidebar .menu a {
-            display: block;
-            padding: 12px 16px;
-            /* margin-top: 10px; */
-            margin: 30px 0;
-            background-color: #f8bbd0;
-            color: #e57373;
-            text-align: center;
-            text-decoration: none;
-            border-radius: 8px;
+        .sidebar h3 {
             font-weight: bold;
-            transition: background-color 0.2s;
+            color: #e91e63;
+            margin-bottom: 2rem;
+            text-align: center;
         }
 
-        .sidebar .menu a:hover {
-            background-color: #f48fb1;
-            color: #fce4ec;
-        }
-
+        .sidebar .menu a,
         .sidebar .logout {
             display: block;
-            margin-top: auto;
-            background-color: #e57373;
-            color: white;
-            border: none;
-            text-align: center;
-            padding: 12px;
-            border-radius: 8px;
+            padding: 0.75rem 1rem;
+            margin: 0.25rem 0;
+            color: #880e4f;
+            background-color: #f8bbd0;
+            border-radius: 0.5rem;
             text-decoration: none;
+            transition: 0.3s;
         }
 
+        .sidebar .menu a:hover,
         .sidebar .logout:hover {
-            background-color: #d32f2f;
+            background-color: #f48fb1;
+            color: #fff;
         }
 
-        /* Overlay for closing sidebar */
-        .overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.4);
-            display: none;
-            z-index: 998;
-        }
-
-        /* 顯示時 */
-        .overlay.active {
-            display: block;
-        }
-
-
-        /* 手機版 Sidebar 初始隱藏，滑出效果 */
-        @media (max-width: 768px) {
-            .sidebar {
-                position: fixed;
-                top: 0;
-                left: -250px;
-                height: 100%;
-                width: 250px;
-                z-index: 1000;
-                transition: left 0.3s ease;
-            }
-
-            .sidebar.active {
-                left: 0;
-            }
-
-            .main-content {
-                padding: 20px;
-                position: relative;
-                z-index: 1;
-                /* 讓 sidebar 蓋在上層 */
-            }
-
-            .wrapper.active .main-content {
-                filter: blur(2px);
-                /* 可選：模糊處理 */
-            }
+        .main-content {
+            flex-grow: 1;
+            padding: 2rem;
         }
 
         /* 主區 */
@@ -246,44 +174,89 @@ $userName = $user['userName'] ?? '錯誤';
             box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
             transform: scale(1.05);
         }
+
+
+        /* 手機版隱藏左側選單 */
+        @media (max-width: 768px) {
+            .sidebar {
+                display: none;
+            }
+        }
+
+        /* offcanvas 樣式 */
+        .offcanvas-header {
+            background-color: #f8bbd0;
+        }
+
+        .offcanvas-body a {
+            display: block;
+            padding: 0.75rem 1rem;
+            margin-bottom: 0.5rem;
+            background-color: #fce4ec;
+            color: #880e4f;
+            border-radius: 0.5rem;
+            text-decoration: none;
+        }
+
+        .offcanvas-body a:hover {
+            background-color: #f48fb1;
+            color: #fff;
+        }
     </style>
 </head>
 
 <body>
-    <div class="page-container">
-        <!-- 漢堡按鈕 (手機版顯示) -->
-        <button class="btn btn-danger d-md-none m-3" id="hamburgerBtn">☰</button>
 
-        <div class="wrapper">
-            <div class="sidebar" id="sidebar">
-                <h3><a href="./dashboard.php">後台管理</a></h3>
-                <div class="menu">
-                    <a href="./index.php">前台首頁</a>
-                    <a href="./dashboard.php">後台首頁</a>
-                    <a href="?do=product" class="menu-ajax" data-page="product">作品集照片</a>
-                    <a href="?do=place" class="menu-ajax" data-page="place">環境/設備照片</a>
-                    <a href="?do=reserve" class="menu-ajax" data-page="reserve">預約時間圖片</a>
-                    <a href="?do=users" class="menu-ajax" data-page="users">使用者管理</a>
-                </div>
-                <a href="./api/logout.php" class="logout">登出</a>
+    <!-- 手機版漢堡按鈕 -->
+    <button class="btn btn-danger d-md-none m-3" type="button" data-bs-toggle="offcanvas" data-bs-target="#mobileMenu">
+        ☰
+    </button>
+
+    <div class="d-flex">
+        <!-- 左側直欄（電腦版） -->
+        <div class="sidebar d-none d-md-block">
+            <h3><a href="./dashboard.php">後台管理</a></h3>
+            <div class="menu">
+                <a href="./index.php">前台首頁</a>
+                <a href="./dashboard.php">後台首頁</a>
+                <a href="?do=product" class="menu-ajax" data-page="product">作品集照片</a>
+                <a href="?do=place" class="menu-ajax" data-page="place">環境/設備照片</a>
+                <a href="?do=reserve" class="menu-ajax" data-page="reserve">預約時間圖片</a>
+                <a href="?do=users" class="menu-ajax" data-page="users">使用者管理</a>
             </div>
+            <a href="./api/logout.php" class="logout">登出</a>
+        </div>
 
-            <main id="main-content" class="main-content">
-                <?php
-                $do = $_GET['do'] ?? 'main';
-                $file = "./backend/" . $do . ".php";
-                if (file_exists($file)) {
-                    include $file;
-                } else {
-                    include './backend/main.php';
-                }
-                ?>
-            </main>
+        <!-- 主要內容區 -->
+        <main class="main-content">
+            <?php
+            $do = $_GET['do'] ?? 'main';
+            $file = "./backend/" . $do . ".php";
+            if (file_exists($file)) {
+                include $file;
+            } else {
+                include './backend/main.php';
+            }
+            ?>
+        </main>
+    </div>
+
+    <!-- Bootstrap 5 Offcanvas（手機版側欄） -->
+    <div class="offcanvas offcanvas-start" tabindex="-1" id="mobileMenu">
+        <div class="offcanvas-header">
+            <h5 class="offcanvas-title">選單</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+            <a href="./index.php">前台首頁</a>
+            <a href="./dashboard.php">後台首頁</a>
+            <a href="?do=product" class="menu-ajax" data-page="product">作品集照片</a>
+            <a href="?do=place" class="menu-ajax" data-page="place">環境/設備照片</a>
+            <a href="?do=reserve" class="menu-ajax" data-page="reserve">預約時間圖片</a>
+            <a href="?do=users" class="menu-ajax" data-page="users">使用者管理</a>
+            <a href="./api/logout.php" class="logout">登出</a>
         </div>
     </div>
-    <!-- 手機版遮罩 -->
-    <div class="overlay" id="overlay"></div>
-
 
     <!-- AJAX Menu -->
     <script>
@@ -296,9 +269,9 @@ $userName = $user['userName'] ?? '錯誤';
 
                 history.pushState(null, null, url); // ✅ 更新網址
 
-                $("#main-content").fadeOut(100, function() {
-                    $("#main-content").load(`./backend/${page}.php`, function() {
-                        $("#main-content").fadeIn(200);
+                $(".main-content").fadeOut(100, function() {
+                    $(".main-content").load(`./backend/${page}.php`, function() {
+                        $(".main-content").fadeIn(200);
                     });
                 });
             });
@@ -309,28 +282,15 @@ $userName = $user['userName'] ?? '錯誤';
                 const page = urlParams.get('do') || 'main';
 
                 $("#main-content").fadeOut(100, function() {
-                    $("#main-content").load(`./backend/${page}.php`, function() {
-                        $("#main-content").fadeIn(200);
+                    $(".main-content").load(`./backend/${page}.php`, function() {
+                        $(".main-content").fadeIn(200);
                     });
                 });
             };
-            // 手機版：點擊漢堡按鈕開啟 sidebar 和 overlay
-            $('#hamburgerBtn').on('click', function() {
-                $('#sidebar').addClass('active');
-                $('#overlay').addClass('active');
-                $('.wrapper').addClass('active'); // 讓 main-content 加上模糊效果
-            });
-
-            // 點擊 overlay 收起 sidebar
-            $('#overlay').on('click', function() {
-                $('#sidebar').removeClass('active');
-                $('#overlay').removeClass('active');
-                $('.wrapper').removeClass('active');
-            });
-
 
         });
     </script>
+
 </body>
 
 </html>

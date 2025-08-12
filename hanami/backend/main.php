@@ -40,7 +40,7 @@ $userName = $user['userName'] ?? '錯誤';
             <div class="dashboard-card text-center">
                 <div class="dashboard-icon">📅</div>
                 <h5 class="mt-2">本日代辦事項</h5>
-                <p class="text-muted"><?= $Todo->count(['completed' => '1']); ?> 筆</p>
+                <p class="text-muted"><?= $Todo->count(['completed' => '0']); ?> 筆</p>
             </div>
         </div>
         <!-- <div class="col-md-3">
@@ -81,11 +81,11 @@ $userName = $user['userName'] ?? '錯誤';
             </div>
         </div>
     </div>
-
+    
     <script>
         function loadTodos() {
             $.get('./api/todoget.php', function(data) {
-                const todos = JSON.parse(data);
+                const todos = data;
                 let html = '';
                 let count = 0;
 
@@ -95,12 +95,12 @@ $userName = $user['userName'] ?? '錯誤';
                     if (todo.completed == 0) count++;
 
                     html += `
-        <li class="list-group-item d-flex align-items-center" data-id="${todo.id}">
-          <input type="checkbox" class="form-check-input me-2 toggle-complete" ${checked}>
-          <span class="flex-grow-1 ${strike}">${todo.title}</span>
-          <button class="btn btn-sm btn-outline-secondary editTodo">✏️</button>
-          <button class="btn btn-sm btn-outline-danger ms-2 deleteTodo">🗑️</button>
-        </li>`;
+                        <li class="list-group-item d-flex align-items-center" data-id="${todo.id}">
+                        <input type="checkbox" class="form-check-input me-2 toggle-complete" ${checked}>
+                        <span class="flex-grow-1 ${strike}">${todo.title}</span>
+                        <button class="btn btn-sm btn-outline-secondary editTodo">✏️</button>
+                        <button class="btn btn-sm btn-outline-danger ms-2 deleteTodo">🗑️</button>
+                        </li>`;
                 });
 
                 $('#todoList').html(html);

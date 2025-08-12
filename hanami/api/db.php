@@ -1,19 +1,20 @@
 <?php
-// 啟用 session
+// 啟用 session 時可使用 login.php 開啟
 // session_start();
 
-//設定時區
+// 設定時區
 date_default_timezone_set("Asia/Taipei");
-//連線
-// $host = 'sql109.infinityfree.com';
-// $db   = 'if0_39375073_hanami';
-// $user = 'if0_39375073';
-// $pass = 'KK394Gr0uwilX80';
 
-$host = 'localhost';
-$db   = 'hanami';
-$user = 'root';
-$pass = '';
+// 資料庫連線參數
+$host = 'localhost'; 
+$db   = 'hanami';    
+$user = 'root';      
+$pass = '';          
+
+// $host = 'wda.mackliu.com'; 
+// $db   = 's1140215';     
+// $user = 's1140215';       
+// $pass = 's1140215';           
 
 try {
     $pdo = new PDO("mysql:host=$host;dbname=$db;charset=utf8", $user, $pass);
@@ -22,15 +23,14 @@ try {
     die("連線失敗: " . $e->getMessage());
 }
 
-//查詢
+// 查詢簡化函式（快速使用）
 function q($sql)
 {
-    $dsn = "mysql:host=localhost;dbname=hanami;charset=utf8";
-    $pdo = new PDO($dsn, 'root', '');
+    global $pdo;
     return $pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
 }
 
-// 輸出
+// 陣列印出
 function dd($array)
 {
     echo "<pre>";
@@ -38,122 +38,125 @@ function dd($array)
     echo "</pre>";
 }
 
-//頁面跳轉
+// 導頁
 function to($url)
 {
     header("location:" . $url);
+    exit;
 }
 
+// 資料表操作類別
 class DB
 {
-    private $dsn = "mysql:host=localhost;dbname=hanami;charset=utf8";
     private $pdo;
     private $table;
 
     function __construct($table)
     {
+        global $pdo; // 使用外部定義的全域連線
+        $this->pdo = $pdo;
         $this->table = $table;
-        $this->pdo = new PDO($this->dsn, 'root', '');
     }
 
     function all(...$arg)
     {
-        $sql = "select * from $this->table";
+        $sql = "SELECT * FROM $this->table";
+
         if (isset($arg[0])) {
             if (is_array($arg[0])) {
                 $tmp = $this->arraytosql($arg[0]);
-                $sql = $sql . " where " . join(" AND ", $tmp);
+                $sql .= " WHERE " . join(" AND ", $tmp);
             } else {
                 $sql .= $arg[0];
             }
         }
+
         if (isset($arg[1])) {
             $sql .= $arg[1];
         }
-        // echo $sql;
+
         return $this->pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
     }
 
     function count(...$arg)
     {
-        $sql = "select count(*) from $this->table";
+        $sql = "SELECT COUNT(*) FROM $this->table";
+
         if (isset($arg[0])) {
             if (is_array($arg[0])) {
                 $tmp = $this->arraytosql($arg[0]);
-                $sql = $sql . " where " . join(" AND ", $tmp);
+                $sql .= " WHERE " . join(" AND ", $tmp);
             } else {
                 $sql .= $arg[0];
             }
         }
+
         if (isset($arg[1])) {
             $sql .= $arg[1];
         }
-        // echo $sql;
+
         return $this->pdo->query($sql)->fetchColumn();
     }
 
-
     function find($id)
     {
-        $sql = "select * from $this->table ";
+        $sql = "SELECT * FROM $this->table ";
 
         if (is_array($id)) {
             $tmp = $this->arraytosql($id);
-            $sql = $sql . " WHERE " . join(" AND ", $tmp);
+            $sql .= " WHERE " . join(" AND ", $tmp);
         } else {
-            $sql .= " WHERE `id`='$id'";
+            $sql .= " WHERE `id` = '$id'";
         }
-        // echo $sql;
+
         return $this->pdo->query($sql)->fetch(PDO::FETCH_ASSOC);
     }
 
     function save($array)
     {
         if (isset($array['id'])) {
-            //update
-            $sql = "update $this->table set ";
+            // update
+            $sql = "UPDATE $this->table SET ";
             $tmp = $this->arraytosql($array);
-            $sql .= join(" , ", $tmp) . "where `id`= '{$array['id']}'";
+            $sql .= join(" , ", $tmp) . " WHERE `id` = '{$array['id']}'";
         } else {
-            //insert
+            // insert
             $cols = join("`,`", array_keys($array));
-            $values = join("','", $array);
-            $sql = "insert into $this->table(`$cols`) values('$values')";
+            $values = join("','", array_values($array));
+            $sql = "INSERT INTO $this->table (`$cols`) VALUES ('$values')";
         }
-        // echo $sql;
-        return $this->pdo->query($sql)->fetch(PDO::FETCH_ASSOC);
+
+        // return 資料成功與否
+        return $this->pdo->query($sql);
     }
 
     function del($id)
     {
-        $sql = "delete from $this->table";
+        $sql = "DELETE FROM $this->table";
 
         if (is_array($id)) {
             $tmp = $this->arraytosql($id);
-            $sql = $sql . " where " . join(" AND ", $tmp);
+            $sql .= " WHERE " . join(" AND ", $tmp);
         } else {
-            $sql .= " WHERE `id`='$id'";
+            $sql .= " WHERE `id` = '$id'";
         }
-        // echo $sql;
+
         return $this->pdo->exec($sql);
     }
 
     private function arraytosql($array)
     {
         $tmp = [];
-        foreach ($array as $key => $vaule) {
-            $tmp[] = "`$key`='$vaule'";
+        foreach ($array as $key => $value) {
+            $tmp[] = "`$key` = '$value'";
         }
         return $tmp;
     }
 }
 
-
-
+// ✅ 實體化
 $Product = new DB('product');
 $Place = new DB('place');
 $Reserve = new DB('reserve');
 $User = new DB('users');
-$Todo = new DB('todo')
-
-?>
+$Todo = new DB('todo');

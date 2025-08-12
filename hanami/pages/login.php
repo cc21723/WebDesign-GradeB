@@ -1,5 +1,6 @@
 <?php
 session_start();
+
 include_once '../api/db.php';
 
 $error = '';
@@ -18,7 +19,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $_SESSION['admin'] = $user['id'];
         $_SESSION['user'] = $user;
 
-        header("Location: /hanami/dashboard.php");
+        header("Location: /dashboard.php");
         exit;
     } else {
         $error = "帳號或密碼錯誤";
