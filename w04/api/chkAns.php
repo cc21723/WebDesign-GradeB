@@ -1,8 +1,5 @@
-<?php
-include_once "db.php";
+<?php include_once "db.php";
 
-if($_GET['chk'] == $_SESSION['ans']){
+if ($_GET['chk'] == $_SESSION['ans']) {
     echo 1;
 }
-
-?>
