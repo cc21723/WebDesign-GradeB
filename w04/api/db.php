@@ -218,9 +218,13 @@ class DB
 
 
 
-$Poster = new DB('posters');
-$Movie = new DB('movie');
-$Order = new DB('orders')
+$Admin = new DB('admin');
+$Mem = new DB('mem');
+$News = new DB('news');
+$Order = new DB('order');
+$Bot = new DB('order');
+$Th = new DB('th');
+
 
 
 
