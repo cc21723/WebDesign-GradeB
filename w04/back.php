@@ -11,10 +11,9 @@
 </head>
 
 <body>
-	<iframe name="back" style="display:none;"></iframe>
 	<div id="main">
 		<div id="top">
-			<a href="?">
+			<a href="index.php">
 				<img src="./images/0416.jpg">
 			</a>
 			<img src="./images/0417.jpg">
@@ -32,12 +31,14 @@
 		</div>
 		<div id="right">
 			<?php
-			$do = $_GET['do']??'main';
-			$file='./front/{$do}.php';
-			if(file_exists($file)){
+			$do = $_GET['do'] ?? 'main';
+			$file = "./back/{$do}.php";
+			if (file_exists($file)) {
 				include $file;
+			} else {
+				include "./back/admin.php";
 			}
-			
+
 			?>
 		</div>
 		<div id="bottom" style="line-height:70px; color:#FFF; background:url(./icon/bot.png);" class="ct">
