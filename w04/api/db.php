@@ -12,7 +12,7 @@ function dd($array)
 
 function q($sql)
 {
-    $dsn = 'mysql:host=localhost;dbname=db15_3;charset=utf8';
+    $dsn = 'mysql:host=localhost;dbname=db15_4;charset=utf8';
     $pdo = new PDO($dsn, 'root', '');
     return $pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
 }
@@ -24,7 +24,7 @@ function to($url)
 
 class DB
 {
-    private $dsn = "mysql:host=localhost;dbname=db15_3;charset=utf8";
+    private $dsn = "mysql:host=localhost;dbname=db15_4;charset=utf8";
     private $pdo;
     private $table;
 
@@ -218,11 +218,12 @@ class DB
 
 
 
+$User = new DB('user');
 $Admin = new DB('admin');
 $Mem = new DB('mem');
 $News = new DB('news');
 $Order = new DB('order');
-$Bot = new DB('order');
+$Bot = new DB('bot');
 $Th = new DB('th');
 
 
