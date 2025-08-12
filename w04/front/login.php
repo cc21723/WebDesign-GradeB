@@ -21,10 +21,28 @@
     <tr>
         <td class="tt ct">驗證碼</td>
         <td class="pp">
-
+            <?php
+            $a=rand(10,99);
+            $b=rand(10,99);
+            $_SESSION['ans'] = $a+$b;
+            echo $a . " + " . $b . " = "; 
+            ?>
             <input type="text" name="chk" id="chk">
         </td>
     </tr>
 </table>
 
-<div class="ct"><button>確認</button></div>
+<div class="ct"><button onclick="login()">確認</button></div>
+
+<script> 
+    function login() { 
+        let chk = $('#chk').val();
+        $.get("./api/chkAns.php",{chk},(res)=>{
+            if(parseInt(res)==1){
+                alert('驗證成功');
+            }else{
+                alert('對不起，你輸入的驗證碼有誤，請重新輸入');
+            }
+        })
+     }
+</script>
