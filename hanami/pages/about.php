@@ -1,4 +1,4 @@
-<?php include_once "./api/db.php" ?>
+<?php include_once "../api/db.php" ?>
 <style>
     .about-img {
         width: 100%;

@@ -26,6 +26,10 @@ $userName = $user['userName'] ?? '錯誤';
             background: #fff0f5;
             font-family: 'Segoe UI', sans-serif;
         }
+        a{
+            text-decoration: none;
+            color: #e91e63;
+        }
 
         /* 左側直欄樣式 */
         .sidebar {
@@ -41,6 +45,7 @@ $userName = $user['userName'] ?? '錯誤';
             color: #e91e63;
             margin-bottom: 2rem;
             text-align: center;
+            
         }
 
         .sidebar .menu a,
