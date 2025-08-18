@@ -10,25 +10,39 @@
     新增中分類
     <select name="selBig" id="selBig"></select>
     <input type="text" name="mid" id="mid">
-    <button>新增</button>
+    <button onclick="addMid()">新增</button>
 </div>
 
 <!-- table.all>(tr.tt>td+td.ct>button*2) -->
 <table class="all">
-    <tr class="tt">
-        <td>fafdsaf</td>
-        <td class="ct">
-            <button>修改</button>
-            <button>刪除</button>
-        </td>
-    </tr>
-    <tr class="pp ct">
-        <td>12312</td>
-        <td>
-            <button>修改</button>
-            <button>刪除</button>
-        </td>
-    </tr>
+    <?php
+    $bigs = $Type->all(['big_id' => 0]);
+    foreach ($bigs as $big):
+    ?>
+        <tr class="tt">
+            <td><?= $big['name']; ?></td>
+            <td class="ct">
+                <button class="edit-btn" data-id="<?= $big['id']; ?>">修改</button>
+                <button class="del-btn" data-id="<?= $big['id']; ?>">刪除</button>
+            </td>
+        </tr>
+        <?php
+        if ($Type->count(['big_id' => $big['id']]) > 0):
+            $mids = $Type->all(['big_id' => $big['id']]);
+            foreach ($mids as $mid):
+        ?>
+                <tr class="pp ct">
+                    <td><?= $mid['name'] ?></td>
+                    <td>
+                        <button class="edit-btn" data-id="<?= $big['id']; ?>">修改</button>
+                        <button class="del-btn" data-id="<?= $big['id']; ?>">刪除</button>
+                    </td>
+                </tr>
+    <?php
+            endforeach;
+        endif;
+    endforeach;
+    ?>
 </table>
 
 <h2 class="ct">商品管理</h2>
@@ -77,4 +91,25 @@
             $("#selBig").html(options);
         })
     }
+
+    function addMid() {
+        let name = $("#mid").val();
+        let big_id = $("#selBig").val();
+        $.post("./api/save_type.php", {
+            name,
+            big_id
+        }, () => {
+            location.reload();
+        })
+    }
+
+    $(".del-btn").on("click", function() {
+        let id = $(this).data("id");
+        $.post("./api/del.php", {
+            id,
+            table: 'Type'
+        }, () => {
+            location.reload();
+        })
+    })
 </script>
