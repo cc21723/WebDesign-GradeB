@@ -19,7 +19,7 @@
     $bigs = $Type->all(['big_id' => 0]);
     foreach ($bigs as $big):
     ?>
-    <!-- 大分類 -->
+        <!-- 大分類 -->
         <tr class="tt">
             <td><?= $big['name']; ?></td>
             <td class="ct">
@@ -32,7 +32,7 @@
             $mids = $Type->all(['big_id' => $big['id']]);
             foreach ($mids as $mid):
         ?>
-        <!-- 中分類 -->
+                <!-- 中分類 -->
                 <tr class="pp ct">
                     <td><?= $mid['name'] ?></td>
                     <td>
@@ -105,18 +105,21 @@
         })
     }
 
-    $(".edit-btn").on("click",function(){
-    let id=$(this).data("id");
-    let name=$(this).parent().prev().text();
-    let newName=prompt("請輸入新的分類名稱",name);
-    if(newName != null){
-        $.post("./api/save_type.php",{id,name:newName},()=>{
-            $(this).parent().prev().text(newName);
-            //location.reload();
-        })
-    }
+    $(".edit-btn").on("click", function() {
+        let id = $(this).data("id");
+        let name = $(this).parent().prev().text();
+        let newName = prompt("請輸入新的分類名稱", name);
+        if (newName != null) {
+            $.post("./api/save_type.php", {
+                id,
+                name: newName
+            }, () => {
+                $(this).parent().prev().text(newName);
+                //location.reload();
+            })
+        }
 
-})
+    })
 
     $(".del-btn").on("click", function() {
         let id = $(this).data("id");
