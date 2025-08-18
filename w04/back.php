@@ -4,7 +4,7 @@ if(!isset($_SESSION['admin'])){
 	exit;
 }
 
-$super=$Admin->find(['acc'=>$_SESSION['']]);
+$super=$Admin->find(['acc'=>$_SESSION['admin']]);
 $super_pr = unserialize($super['pr']);
 ?>
 
