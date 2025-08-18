@@ -225,6 +225,7 @@ $News = new DB('news');
 $Order = new DB('order');
 $Bot = new DB('bot');
 $Th = new DB('th');
+$Type = new DB('type');
 
 
 
