@@ -59,18 +59,27 @@
         <td>狀態</td>
         <td>操作</td>
     </tr>
-    <tr class="pp ct">
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td>
-            <button>修改</button>
-            <button>刪除</button>
-            <button>上架</button>
-            <button>下架</button>
-        </td>
-    </tr>
+    <?php
+    $items = $Item->all();
+    foreach ($items as $item):
+    ?>
+        <tr class="pp ct">
+            <td><?= $item['no']; ?></td>
+            <td><?= $item['name']; ?></td>
+            <td><?= $item['stock']; ?></td>
+            <td>
+                <?php
+                echo ($item['sh'] == 1) ? "販售中" : "已下架";
+                ?>
+            </td>
+            <td>
+                <button data-id="<?= $item['id']; ?>" class="editItem-btn">修改</button>
+                <button data-id="<?= $item['id']; ?>" class="delItem-btn">刪除</button>
+                <button data-id="<?= $item['id']; ?>" class="up-btn">上架</button>
+                <button data-id="<?= $item['id']; ?>" class="down-btn">下架</button>
+            </td>
+        </tr>
+    <?php endforeach; ?>
 </table>
 
 
@@ -105,6 +114,7 @@
         })
     }
 
+    // 編輯分類
     $(".edit-btn").on("click", function() {
         let id = $(this).data("id");
         let name = $(this).parent().prev().text();
@@ -121,6 +131,7 @@
 
     })
 
+    // 刪除分類
     $(".del-btn").on("click", function() {
         let id = $(this).data("id");
         $.post("./api/del.php", {
@@ -130,4 +141,45 @@
             location.reload();
         })
     })
+
+
+
+    // 刪除商品
+    $(".delItem-btn").on("click", function() {
+        let id = $(this).data("id");
+        $.post("./api/del.php", {
+            id,
+            table: 'Item'
+        }, () => {
+            location.reload();
+        })
+    })
+
+    // 上架或下架
+    $(".up-btn, .down-btn").on("click", function() {
+        let id = $(this).data("id");
+        let sh = 1;
+        let action = $(this).text();
+        switch (action) {
+            case "上架":
+                sh = 1;
+                break;
+            case "下架":
+                sh = 0;
+                break;
+
+        }
+        $.post("./api/sw.php", {
+            id,
+            sh
+        }, () => {
+            //location.reload();
+            $(this).parent().prev().text(sh == 1 ? "販售中" : "已下架");
+        })
+    })
+
+    $(".editItem-btn").on("click",function(){
+    let id=$(this).data("id");
+    location.href=`?do=edit_item&id=${id}`;
+})
 </script>

@@ -1,5 +1,4 @@
 <h2 class="ct">訂單管理</h2>
-
 <table class="all">
     <tr class="tt ct">
         <td>訂單編號</td>
@@ -9,16 +8,21 @@
         <td>下單時間</td>
         <td>操作</td>
     </tr>
+    <?
+    $orders = $Order->all();
+    foreach($orders as $order):
+    ?>
     <tr class="pp ct">
-        <td><?=;?></td>
-        <td><?=;?></td>
-        <td><?=;?></td>
-        <td><?=;?></td>
-        <td><?=;?></td>
+        <td><?= $order['id']; ?></td>
+        <td><?= $order['']; ?></td>
+        <td><?= $order['']; ?></td>
+        <td><?= $order['']; ?></td>
+        <td><?= $order['']; ?></td>
         <td>
             <button class="del-btn" data-id="<?= $mem['id']; ?>">刪除</button>
         </td>
     </tr>
+    <?endforeach;?>
 </table>
 
 <script>
