@@ -54,17 +54,33 @@
                 </div>
                 <div id="left" class="ct">
                         <div style="min-height:400px;">
+                                <a href="?type=0">全部商品()</a>
                                 <?php
-                                $bigs = $Type->all(['big_id'=>0]);
-                                foreach($bigs as $big):
+                                $bigs = $Type->all(['big_id' => 0]);
+                                foreach ($bigs as $big):
                                 ?>
-                                <a href="?type=<?=$big['id'];?>"><?=$big['name'];?></a>
-                                <?php endforeach;?>
+                                        <div class="ww">
+                                                <a href="?type=<?= $big['id']; ?>"><?= $big['name']; ?>( )</a>
+                                                <?php
+                                                if ($Type->count(['big_id' => $big['id']]) > 0):
+                                                        $mids = $Type->all(['big_id' => $big['id']]);
+                                                        echo "<div class='s'>";
+                                                        foreach ($mids as $mid):
+                                                ?>
+                                                                <a href="?type=<?= $mid['id']; ?>"><?= $mid['name']; ?>( )</a>
+                                        <?php
+                                                        endforeach;
+                                                        echo "</div>";
+                                                endif;
+                                                echo "</div>";
+                                        endforeach;
+                                        ?>
+                                        </div>
                         </div>
                         <span>
                                 <div>進站總人數</div>
                                 <div style="color:#f00; font-size:28px;">
-                                        00005 
+                                        00005
                                 </div>
                         </span>
                 </div>
