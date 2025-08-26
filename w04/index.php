@@ -54,11 +54,18 @@
                 </div>
                 <div id="left" class="ct">
                         <div style="min-height:400px;">
+                                <?php
+                                $bigs = $Type->all(['big_id'=>0]);
+                                foreach($bigs as $big):
+                                ?>
+                                <a href="?type=<?=$big['id'];?>"><?=$big['name'];?></a>
+                                <?php endforeach;?>
                         </div>
                         <span>
                                 <div>進站總人數</div>
                                 <div style="color:#f00; font-size:28px;">
-                                        00005 </div>
+                                        00005 
+                                </div>
                         </span>
                 </div>
                 <div id="right">
