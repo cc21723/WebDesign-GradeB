@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multi IP Ajax</title>
+    <!-- 載入bs5 css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.7/css/bootstrap.min.css"
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+
+<body>
+    <div class="container mt-3">
+        <h3>Multi IP Ajax</h3>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>IP</th>
+                    <th style="width: 90px;">ID</th>
+                    <th style="width: 90px;">Name</th>
+                    <th>Msg</th>
+                </tr>
+            </thead>
+            <tbody class="myTbody">
+            </tbody>
+        </table>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" crossorigin="anonymous"
+        referrerpolicy="no-referrer"></script>
+
+    <script>
+        $(document).ready(function () {
+            const tbody = $(".myTbody");
+
+            let ipList = [];
+            ipList.push("192.168.211.3");
+            for (let i = 52; i <= 73; i++) {
+                ipList.push(`192.168.211.${i}`);
+            }
+
+            ipList.sort((a, b) => parseInt(a.split(".")[3]) - parseInt(b.split(".")[3]));
+
+            // ✅ 1. 先建立表格結構（每個 IP 一行）
+            ipList.forEach(ip => {
+                let row = `
+            <tr id="row-${ip.replace(/\./g, '-')}">
+                <td>${ip}</td>
+                <td class="id-col">等待中...</td>
+                <td class="name-col">等待中...</td>
+                <td class="msg-col">等待中...</td>
+            </tr>
+        `;
+                tbody.append(row);
+            });
+
+            // ✅ 2. 發送請求並更新對應的行
+            ipList.forEach(ip => {
+                let url = `http://${ip}/hello.php`;
+
+                $.ajax({
+                    type: "get",
+                    url: url,
+                    dataType: "json",
+                    success: function (res) {
+                        let rowId = `#row-${ip.replace(/\./g, '-')}`;
+                        $(rowId).find(".id-col").text(res.id);
+                        $(rowId).find(".name-col").text(res.name);
+                        $(rowId).find(".msg-col").text(res.msg);
+                    },
+                    error: function () {
+                        let rowId = `#row-${ip.replace(/\./g, '-')}`;
+                        $(rowId).find(".id-col").text("-");
+                        $(rowId).find(".name-col").html('<span class="text-danger">連線失敗</span>');
+                        $(rowId).find(".msg-col").text("-");
+                    }
+                });
+            });
+        });
+    </script>
+
+
+</body>
+
+</html>
