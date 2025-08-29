@@ -1,74 +1,78 @@
 <?php
-// 建立購物車頁面的登入判斷
-if(isset($_GET['id'])){
-        $_SESSION['cart'][$_GET['id']]=$_GET['qt'];
 
+if (isset($_GET['id'])) {
+    $_SESSION['cart'][$_GET['id']] = $_GET['qt'];
 }
 
-if(!isset($_SESSION['login'])){
+if (!isset($_SESSION['login'])) {
     to("?do=login");
 }
-
 ?>
 
-<!-- 建立購物車session -->
- <h2 class="ct"><?=$_SESSION['login'];?>的購物車</h2>
+<h2 class="ct"><?= $_SESSION['login']; ?>的購物車</h2>
 
 <?php
-if(isset($_SESSION['cart']) && count($_SESSION['cart'])>0){
-    // dd($_SESSION['cart']);
-    // 在購物車顯示商品列表
+if (isset($_SESSION['cart']) && count($_SESSION['cart']) > 0) {
 ?>
-<table class="all">
-    <tr class="tt ct">
-        <td>編號</td>
-        <td>商品名稱</td>
-        <td>數量</td>
-        <td>庫存量</td>
-        <td>單價</td>
-        <td>小計</td>
-        <td>刪除</td>
-    </tr>
-    <?php
-    foreach ($_SESSION['cart'] as $id => $qt):
-        $item = $Item->find($id);
-    ?>
-    <tr class="pp ct">
-        <td><?=$item['no'];?></td>
-        <td><?=$item['name'];?></td>
-        <td><?=$qt;?></td>
-        <td><?=$item['stock'];?></td>
-        <td><?=$item['price'];?></td>
-        <td><?=$item['price']*$qt;?></td>
-        <td>
-            <img src="./icon/0415.jpg" class="del-btn" data-id="<?=$id;?>">
-        </td>
-    </tr>
-    <?php endforeach;?>
-</table>
-<div  class='ct'>
-    <a href="index.php">
-        <img src="./icon/0411.jpg" alt="">
-    </a>
-    <a href="?do=checkout">
-        <img src="./icon/0412.jpg" alt="">
-    </a>
-</div>
+
+    <table class="all">
+        <tr class="tt ct">
+            <td>編號</td>
+            <td>商品名稱</td>
+            <td>數量</td>
+            <td>庫存量</td>
+            <td>單價</td>
+            <td>小計</td>
+            <td>刪除</td>
+        </tr>
+        <?php
+        foreach ($_SESSION['cart'] as $id => $qt):
+            $item = $Item->find($id);
+        ?>
+            <tr class="pp ct">
+
+                <td><?= $item['no']; ?></td>
+                <td><?= $item['name']; ?></td>
+                <td><?= $qt; ?></td>
+                <td><?= $item['stock']; ?></td>
+                <td><?= $item['price']; ?></td>
+                <td><?= $item['price'] * $qt; ?></td>
+                <td>
+                    <img src="./icon/0415.jpg" class='del-btn' data-id="<?= $id; ?>">
+                </td>
+            </tr>
+        <?php
+        endforeach;
+        ?>
+    </table>
+
+
+    <div class='ct'>
+        <a href="index.php">
+            <img src="./icon/0411.jpg" alt="">
+        </a>
+        <a href="?do=checkout">
+            <img src="./icon/0412.jpg" alt="">
+        </a>
+    </div>
 
 <?php
-}else{
-    
+} else {
+
     echo "購物車是空的";
-}    
-    
+}
+
 
 ?>
+
+
 <script>
-    $(".del-btn").on("click",function () { 
+    $(".del-btn").on("click", function() {
         let id = $(this).data("id");
-        $.post("./api/delCart.php",{id},()=>{
-            location.reload();
-            location.href="?do=buycart";
+        $.post("./api/delCart.php", {
+            id
+        }, () => {
+            location.href = "?do=buycart";
         })
-     })
+    })
 </script>

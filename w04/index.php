@@ -12,6 +12,7 @@
         <script src="./js/js.js"></script>
 </head>
 
+
 <body>
         <div id="main">
                 <div id="top">
@@ -96,7 +97,7 @@
                                 ?>
                         </div>
                         <div id="bottom" style="line-height:70px;background:url(./icon/bot.png); color:#FFF;" class="ct">
-                                <?= $Bot->find(1)['text']; ?> </div>
+                                <?= $Bot->find(1)['bottom']; ?> </div>
                 </div>
 
 </body>
