@@ -8,21 +8,25 @@
         <td>下單時間</td>
         <td>操作</td>
     </tr>
-    <?
+    <?php
     $orders = $Order->all();
-    foreach($orders as $order):
+    foreach ($orders as $order):
     ?>
-    <tr class="pp ct">
-        <td><?= $order['id']; ?></td>
-        <td><?= $order['']; ?></td>
-        <td><?= $order['']; ?></td>
-        <td><?= $order['']; ?></td>
-        <td><?= $order['']; ?></td>
-        <td>
-            <button class="del-btn" data-id="<?= $mem['id']; ?>">刪除</button>
-        </td>
-    </tr>
-    <?endforeach;?>
+        <tr class="pp ct">
+            <td>
+                <a href="?do=detail&id=<?= $order['no']; ?>">
+                    <?= $order['no']; ?>
+                </a>
+            </td>
+            <td><?= $order['total']; ?></td>
+            <td><?= $order['acc']; ?></td>
+            <td><?= $order['name']; ?></td>
+            <td><?= date("Y/m/d", ($order['created_at'])); ?></td>
+            <td>
+                <button class="del-btn" data-id="<?= $mem['id']; ?>">刪除</button>
+            </td>
+        </tr>
+    <?php endforeach; ?>
 </table>
 
 <script>
