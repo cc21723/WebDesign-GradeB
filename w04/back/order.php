@@ -14,14 +14,14 @@
     ?>
         <tr class="pp ct">
             <td>
-                <a href="?do=detail&id=<?= $order['no']; ?>">
+                <a href="?do=detail&no=<?= $order['no']; ?>">
                     <?= $order['no']; ?>
                 </a>
             </td>
             <td><?= $order['total']; ?></td>
             <td><?= $order['acc']; ?></td>
             <td><?= $order['name']; ?></td>
-            <td><?= date("Y/m/d", ($order['created_at'])); ?></td>
+            <td><?= date("Y/m/d", strtotime($order['created_at'])); ?></td>
             <td>
                 <button class="del-btn" data-id="<?= $mem['id']; ?>">刪除</button>
             </td>
