@@ -8,95 +8,96 @@
 
         <title>┌精品電子商務網站」</title>
         <link href="./css/css.css" rel="stylesheet" type="text/css">
-        <script src="./js/jquery-3.4.1.min.js"></script>
+        <script src="./js/jquery-3.4.1.js"></script>
         <script src="./js/js.js"></script>
 </head>
 
 <body>
         <div id="main">
                 <div id="top">
-                        <a href="index.php">
+                        <a href="?">
                                 <img src="./images/0416.jpg">
                         </a>
                         <div style="padding:10px;">
-                                <a href="index.php">回首頁</a> |
+                                <a href="?">回首頁</a> |
                                 <a href="?do=news">最新消息</a> |
                                 <a href="?do=look">購物流程</a> |
                                 <a href="?do=buycart">購物車</a> |
-
                                 <?php
                                 if (isset($_SESSION['login'])) {
                                         echo "<a href='./api/logout.php'>";
                                         echo "登出";
-                                        echo "</a>";
+                                        echo "</a> ";
                                 } else {
                                         echo "<a href='?do=login'>";
                                         echo "會員登入";
-                                        echo "</a>";
+                                        echo "</a> ";
                                 }
                                 ?>
                                 |
                                 <?php
                                 if (isset($_SESSION['admin'])) {
-                                        echo "<a href='./back.php'>";
+                                        echo "<a href='back.php'>";
                                         echo "返回管理";
-                                        echo "</a>";
+                                        echo "</a> ";
                                 } else {
                                         echo "<a href='?do=admin'>";
                                         echo "管理登入";
-                                        echo "</a>";
+                                        echo "</a> ";
                                 }
+
                                 ?>
 
-                                <marquee>
-                                        年終特賣會開跑了 &nbsp;&nbsp;情人節特惠活動 &nbsp;&nbsp;
-                                </marquee>
-                                <div id="left" class="ct">
-                                        <div style="min-height:400px;">
-                                                <a href="?type=0">全部商品(<?= $Item->count(['sh'=>1]); ?>)</a>
+                        </div>
+                        <marquee>
+                                年終特賣會開跑了&nbsp;&nbsp;情人節特惠活動 &nbsp;&nbsp;
+                </div>
+                </marquee>
+                <div id="left" class="ct">
+                        <div style="min-height:400px;">
+                                <a href="?type=0">全部商品(<?= $Item->count(['sh' => 1]); ?>)</a>
+                                <?php
+                                $bigs = $Type->all(['big_id' => 0]);
+                                foreach ($bigs as $big):
+                                ?>
+                                        <div class="ww">
+                                                <a href="?type=<?= $big['id']; ?>"><?= $big['name']; ?>(<?= $Item->count(['big' => $big['id'], 'sh' => 1]); ?>)</a>
                                                 <?php
-                                                $bigs = $Type->all(['big_id' => 0]);
-                                                foreach ($bigs as $big):
+                                                if ($Type->count(['big_id' => $big['id']]) > 0):
+                                                        $mids = $Type->all(['big_id' => $big['id']]);
+                                                        echo "<div class='s'>";
+                                                        foreach ($mids as $mid):
                                                 ?>
-                                                        <div class="ww">
-                                                                <a href="?type=<?= $big['id']; ?>"><?= $big['name']; ?>(<?= $Item->count(['big' => $big['id'],'sh'=>1]); ?>)</a>
-                                                                <?php
-                                                                if ($Type->count(['big_id' => $big['id']]) > 0):
-                                                                        $mids = $Type->all(['big_id' => $big['id']]);
-                                                                        echo "<div class='s'>";
-                                                                        foreach ($mids as $mid):
-                                                                ?>
-                                                                                <a href="?type=<?= $mid['id']; ?>"><?= $mid['name']; ?>(<?= $Item->count(['mid' => $mid['id'],'sh'=>1]); ?>)</a>
-                                                        <?php
-                                                                        endforeach;
-                                                                        echo "</div>";
-                                                                endif;
-                                                                echo "</div>";
+                                                                <a href="?type=<?= $mid['id']; ?>"><?= $mid['name']; ?>(<?= $Item->count(['mid' => $mid['id'], 'sh' => 1]); ?>)</a>
+                                        <?php
                                                         endforeach;
-                                                        ?>
-                                                        </div>
-                                                        <span>
-                                                                <div>進站總人數</div>
-                                                                <div style="color:#f00; font-size:28px;">
-                                                                        00005
-                                                                </div>
-                                                        </span>
+                                                        echo "</div>";
+                                                endif;
+                                                echo "</div>";
+                                        endforeach;
+                                        ?>
                                         </div>
-                                        <div id="right">
-                                                <?php
-                                                $do = $_GET['do'] ?? 'main';
-                                                $file = "./front/{$do}.php";
-                                                if (file_exists($file)) {
-                                                        include $file;
-                                                } else {
-                                                        include "./front/main.php";
-                                                }
-
-                                                ?>
-                                        </div>
-                                        <div id="bottom" style="line-height:70px;background:url(./icon/bot.png); color:#FFF;" class="ct">
-                                                <?= $Bot->find(1)['text']; ?> </div>
-                                </div>
+                                        <span>
+                                                <div>進站總人數</div>
+                                                <div style="color:#f00; font-size:28px;">
+                                                        00005
+                                                </div>
+                                        </span>
+                        </div>
+                        <div id="right">
+                                <?php
+                                $do = $_GET['do'] ?? 'main';
+                                $file = "./front/{$do}.php";
+                                if (file_exists($file)) {
+                                        include $file;
+                                } else {
+                                        include "./front/main.php";
+                                }
+                                ?>
+                        </div>
+                        <div id="bottom" style="line-height:70px;background:url(./icon/bot.png); color:#FFF;" class="ct">
+                                <?= $Bot->find(1)['text']; ?> </div>
+                </div>
 
 </body>
 

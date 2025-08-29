@@ -1,5 +1,5 @@
-<!-- 建立購物車頁面的登入判斷 -->
 <?php
+// 建立購物車頁面的登入判斷
 if(isset($_GET['id'])){
         $_SESSION['cart'][$_GET['id']]=$_GET['qt'];
 
